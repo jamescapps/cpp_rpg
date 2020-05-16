@@ -9,11 +9,11 @@
 
 class Character {
     private: 
-        int attack, defense, magic, heal, stealth;
+        mutable int attack, defense, magic, heal, stealth;
        
     public:
-        std::string name;
-        int health;
+        mutable  std::string name;
+        mutable int health;
   
         Character(std::string name, int health,  int attack, int defense, 
                         int magic, int heal, int stealth) {
@@ -26,19 +26,19 @@ class Character {
             this -> stealth = stealth;
         }
 
-        int Attack() {
+        int Attack() const {
             return std::rand() % this -> attack;
         }
 
-        int Defense() {
+        int Defense() const {
             return std::rand() % this -> defense;
         }
 
-        int Magic() {
+        int Magic() const {
             return std::rand() % this -> magic;
         }
 
-        int Heal() {
+        int Heal() const {
             return std::rand() % this -> heal;
         }
 
@@ -63,7 +63,7 @@ class Weapon {
 
 class Battle {
     public:
-        static void Initiate(Character& character1, Character& character2) {
+        static void Initiate(const Character& character1, const Character& character2) {
             while (true) {
                 if (Battle::AttackResult(character1, character2).compare("End of battle!") == 0) {
                     std::cout << "End of battle! \n";
@@ -72,7 +72,7 @@ class Battle {
             }
         }
 
-        static std::string AttackResult(Character& character1, Character& character2) {
+        static std::string AttackResult(const Character& character1, const Character& character2) {
             int char1_attack = character1.Attack();
             int char2_attack = character2.Attack();
    
@@ -140,19 +140,17 @@ class Battle {
         }
 };
 
-void CharacterSelection() {
-    //Should divide up into hero selection and enemy selection.
+Character  HeroSelection() {
     //Hero
     std::string hero_name;
     int hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth;
-   
+ 
     int selection;
     std::cout << "What character would you like to be?:\n(1) Warrior\n(2) Tank\n(3) Wizard\n(4) Healer\n(5) Thief\n";
     std::cin >> selection;
 
     switch(selection) {
         case 1:
-            // name, health, attack, defense, magic, heal, stealth
             std::cout << "You are a warrior!\n";
             hero_name = "Warrior";
             hero_health = 100;
@@ -205,13 +203,19 @@ void CharacterSelection() {
         default:
         //Add a custom character selection here later.
             std::cout << "Please make a valid selection!\n";
-            CharacterSelection();
+            HeroSelection();
     }
 
+        Character hero(hero_name, hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth);
+    
+        return hero; 
+}            
+
+Character  EnemySelection() {
     //Enemy
     std::string monster_name;
     int monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth;
-
+  
     //Get random enemy
     int temp;
     temp =std::rand() % 5;
@@ -239,7 +243,7 @@ void CharacterSelection() {
      } else if (enemy.compare("Giant Spider")) {
          std::cout << "You encounter a Giant Spider!\n";
          monster_name = "Giant Spider";
-         monster_health = 100;
+         monster_heal = 100;
          monster_attack = 10;
          monster_defense = 5;
          monster_magic = 1;
@@ -268,19 +272,16 @@ void CharacterSelection() {
          std::cout << "Something went wrong..." << std::endl;
      }
 
-    // Establish opponents
-    Character hero(hero_name, hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth);
-    Character monster(monster_name, monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth);
+     Character monster(monster_name, monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth);
 
-    //Start battle
-    Battle::Initiate(hero, monster);
+     return monster;
 }
 
 int main() 
 {
     srand(time(NULL));
 
-    CharacterSelection();
+    Battle::Initiate(HeroSelection(), EnemySelection());
 
 
     return 0;
