@@ -9,14 +9,16 @@
 
 class Character {
     private: 
-        mutable int attack, defense, magic, heal, stealth;
+        mutable int attack, defense, magic, heal, stealth, items;
        
     public:
-        mutable  std::string name;
+        mutable std::string name;
         mutable int health;
-  
+        
+        //Character will have 50 available points, every category must have at
+        //least 1 point.
         Character(std::string name, int health,  int attack, int defense, 
-                        int magic, int heal, int stealth) {
+                        int magic, int heal, int stealth, int items) {
             this -> name = name;
             this -> health = health;
             this -> attack = attack;
@@ -24,6 +26,7 @@ class Character {
             this -> magic = magic; 
             this -> heal = heal;
             this -> stealth = stealth;
+            this -> items = items;
         }
 
         int Attack() const {
@@ -42,6 +45,9 @@ class Character {
             return std::rand() % this -> heal;
         }
 
+        int Items() const {
+            return std::rand() % this -> items;
+        }
         // Add more functions here for other actions. 
 };
 
@@ -84,6 +90,9 @@ class Battle {
 
             int char1_heal = character1.Heal();
             int char2_heal = character2.Heal();
+
+            int char1_items = character1.Items();
+            int char2_items = character2.Items();
                
             //Add more here later...
             
@@ -92,7 +101,7 @@ class Battle {
             character1.health = character1.health - char1_damage;
 
             int char2_damage = abs(ceil(char1_attack - char2_defense));
-            character2.health = character2.health -char2_damage; 
+            character2.health = character2.health - char2_damage; 
 
             printf("%s attacks %s and deals %d damage\n",
                     character1.name.c_str(),
@@ -115,7 +124,7 @@ class Battle {
             if (character2.health < 0) {
                 character2.health = 0;
             }
-
+ 
             if (character1.health == 0) {
                 printf("%s has died!\n%s WINS the battle!\n",
                         character1.name.c_str(),
@@ -140,13 +149,13 @@ class Battle {
         }
 };
 
-Character  HeroSelection() {
+Character HeroSelection() {
     //Hero
     std::string hero_name;
-    int hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth;
+    int hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth, hero_items;
  
     int selection;
-    std::cout << "What character would you like to be?:\n(1) Warrior\n(2) Tank\n(3) Wizard\n(4) Healer\n(5) Thief\n";
+    std::cout << "What character would you like to be?:\n(1) Warrior\n(2) Tank\n(3) Wizard\n(4) Healer\n(5) Thief\n(6) Custom Character\n";
     std::cin >> selection;
 
     switch(selection) {
@@ -154,21 +163,23 @@ Character  HeroSelection() {
             std::cout << "You are a warrior!\n";
             hero_name = "Warrior";
             hero_health = 100;
-            hero_attack = 10;
-            hero_defense = 5;
+            hero_attack = 30;
+            hero_defense = 10;
             hero_magic = 1;
             hero_heal = 1;
             hero_stealth = 1;
+            hero_items = 7;
             break;
         case 2:
             std::cout << "You are a tank!\n";
             hero_name = "Tank";
             hero_health = 100;
-            hero_attack = 5;
-            hero_defense = 10;
+            hero_attack = 10;
+            hero_defense = 30;
             hero_magic = 1;
             hero_heal = 1;
             hero_stealth = 1;
+            hero_items = 7;
             break;
         case 3: 
             std::cout << "You are a wizard!\n";
@@ -176,9 +187,10 @@ Character  HeroSelection() {
             hero_health = 100;
             hero_attack = 1;
             hero_defense = 5;
-            hero_magic = 10;
-            hero_heal = 1;
+            hero_magic = 30;
+            hero_heal = 10;
             hero_stealth = 1;
+            hero_items = 3;
             break;
         case 4:
             std::cout << "You are a healer!\n";
@@ -187,34 +199,55 @@ Character  HeroSelection() {
             hero_attack = 1;
             hero_defense = 1;
             hero_magic = 5;
-            hero_heal = 10;
-            hero_stealth = 5;
+            hero_heal = 30;
+            hero_stealth = 4;
+            hero_items = 9;
             break;
         case 5:
             std::cout << "You are a thief!\n";
             hero_name = "Thief";
             hero_health = 100;
-            hero_attack = 3;
+            hero_attack = 5;
             hero_defense = 3;
             hero_magic = 1;
             hero_heal = 1;
-            hero_stealth = 10;
+            hero_stealth = 30;
+            hero_items = 10;
             break;
+        case 6:
+            std::cout << "What is your character's name?: ";
+            std::cin >> hero_name;
+            std::cout <<"You have 50 ability points. Use them wisely...\n";
+            usleep(2000000);
+            std::cout << "How many points would you like to give to the attack category?: ";
+            std::cin >> hero_attack;
+            std::cout << "How many points would you like to give to the defense category?: ";
+            std::cin >> hero_defense;
+            std::cout << "How many points would you like to give to the magic category?:  ";
+            std::cin >> hero_magic;
+            std::cout << "How many points would you like to give to the heal category?: ";
+            std::cin >> hero_heal;
+            std::cout << "How many points would you like to give to the stealth category?: ";
+            std::cin >> hero_stealth;
+            std::cout << "How many points would you like to give to the items category?: ";
+            std::cin >> hero_items;
+            //Will have to add checks later to only allow 50 points.
+            break; 
         default:
         //Add a custom character selection here later.
             std::cout << "Please make a valid selection!\n";
             HeroSelection();
     }
 
-        Character hero(hero_name, hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth);
+        Character hero(hero_name, hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth, hero_items);
     
         return hero; 
 }            
 
-Character  EnemySelection() {
+Character EnemySelection() {
     //Enemy
     std::string monster_name;
-    int monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth;
+    int monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth, monster_items;
   
     //Get random enemy
     int temp;
@@ -231,6 +264,7 @@ Character  EnemySelection() {
          monster_magic = 10;
          monster_heal = 1;
          monster_stealth = 1;
+         monster_items = 1;
      } else if (enemy.compare("Orc")) {
          std::cout << "You encounter an Orc!\n";
          monster_name = "Orc";
@@ -240,6 +274,7 @@ Character  EnemySelection() {
          monster_magic = 2;
          monster_heal = 1;
          monster_stealth = 1;
+         monster_items = 1;
      } else if (enemy.compare("Giant Spider")) {
          std::cout << "You encounter a Giant Spider!\n";
          monster_name = "Giant Spider";
@@ -249,6 +284,7 @@ Character  EnemySelection() {
          monster_magic = 1;
          monster_heal = 1;
          monster_stealth = 1;
+         monster_items = 1;
      } else if (enemy.compare("Troll")) {
          std::cout << "You encounter a Troll!\n";
          monster_name = "Troll";
@@ -258,6 +294,7 @@ Character  EnemySelection() {
          monster_magic = 1;
          monster_heal = 1;
          monster_stealth = 1;
+         monster_items = 1;
      } else if (enemy.compare("Dragon")) {
          std::cout << "You encounter a Dragon!\n";
          monster_name = "Dragon";
@@ -267,12 +304,12 @@ Character  EnemySelection() {
          monster_magic = 5;
          monster_heal = 1;
          monster_stealth = 1;
-         Character two("Dragon", 250, 20, 7, 5, 0, 0);
+         monster_items = 1;
      } else {
          std::cout << "Something went wrong..." << std::endl;
      }
 
-     Character monster(monster_name, monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth);
+     Character monster(monster_name, monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth, monster_items);
 
      return monster;
 }
