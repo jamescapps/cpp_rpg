@@ -9,16 +9,10 @@
 
 class Character {
     private: 
-        int attack;
-        int defense;
-        int magic;
-        int heal;
-        int stealth;
+        int attack, defense, magic, heal, stealth;
        
     public:
         std::string name;
-        //Want to add a weopon type later to affect attack rating. Possibly as
-        //another class.
         int health;
   
         Character(std::string name, int health,  int attack, int defense, 
@@ -52,6 +46,7 @@ class Character {
 };
 
 class Weapon {
+    //Not using yet...
     private:
         int damage_amt;
         int stability;
@@ -64,8 +59,6 @@ class Weapon {
         this -> damage_amt = damage_amt;
         this -> stability = stability;
     }
-
-
 };
 
 class Battle {
@@ -92,7 +85,6 @@ class Battle {
             int char1_heal = character1.Heal();
             int char2_heal = character2.Heal();
                
-        
             //Add more here later...
             
             //Health and Damage
@@ -124,14 +116,14 @@ class Battle {
                 character2.health = 0;
             }
 
-
             if (character1.health == 0) {
-                printf("%s has died!\n%s WINS the battle!",
+                printf("%s has died!\n%s WINS the battle!\n",
                         character1.name.c_str(),
                         character2.name.c_str());
+               
                 return "End of battle!";
             } else if (character2.health == 0) {
-                printf("%s has died\n%s WINS the battle!!",
+                printf("%s has died\n%s WINS the battle!!\n",
                         character2.name.c_str(),
                         character1.name.c_str());
                 
@@ -147,8 +139,13 @@ class Battle {
             return "End of turn!";
         }
 };
-/*
-void CharacterSelection() { 
+
+void CharacterSelection() {
+    //Should divide up into hero selection and enemy selection.
+    //Hero
+    std::string hero_name;
+    int hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth;
+   
     int selection;
     std::cout << "What character would you like to be?:\n(1) Warrior\n(2) Tank\n(3) Wizard\n(4) Healer\n(5) Thief\n";
     std::cin >> selection;
@@ -157,84 +154,134 @@ void CharacterSelection() {
         case 1:
             // name, health, attack, defense, magic, heal, stealth
             std::cout << "You are a warrior!\n";
-            Character one("Warrior", 100, 10, 5, 0, 0, 0);
+            hero_name = "Warrior";
+            hero_health = 100;
+            hero_attack = 10;
+            hero_defense = 5;
+            hero_magic = 1;
+            hero_heal = 1;
+            hero_stealth = 1;
             break;
         case 2:
             std::cout << "You are a tank!\n";
-           // return Character one("Tank", 100, 5, 10, 0, 0, 0);
+            hero_name = "Tank";
+            hero_health = 100;
+            hero_attack = 5;
+            hero_defense = 10;
+            hero_magic = 1;
+            hero_heal = 1;
+            hero_stealth = 1;
             break;
         case 3: 
             std::cout << "You are a wizard!\n";
-            //return Character one("Wizard", 100, 0, 5, 10, 0, 0);
+            hero_name = "Wizard";
+            hero_health = 100;
+            hero_attack = 1;
+            hero_defense = 5;
+            hero_magic = 10;
+            hero_heal = 1;
+            hero_stealth = 1;
             break;
         case 4:
             std::cout << "You are a healer!\n";
-            //return Characterone("Healer", 100, 0, 0, 5, 10, 5);
+            hero_name = "Healer";
+            hero_health = 100;
+            hero_attack = 1;
+            hero_defense = 1;
+            hero_magic = 5;
+            hero_heal = 10;
+            hero_stealth = 5;
             break;
         case 5:
             std::cout << "You are a thief!\n";
-            //return Character one("Thief", 100, 3, 3, 0, 0, 10);
+            hero_name = "Thief";
+            hero_health = 100;
+            hero_attack = 3;
+            hero_defense = 3;
+            hero_magic = 1;
+            hero_heal = 1;
+            hero_stealth = 10;
             break;
         default:
+        //Add a custom character selection here later.
             std::cout << "Please make a valid selection!\n";
             CharacterSelection();
     }
-}*/
 
-std::string RandomEnemy() {
+    //Enemy
+    std::string monster_name;
+    int monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth;
+
+    //Get random enemy
     int temp;
     temp =std::rand() % 5;
     std::vector<std::string> enemies = {"Demon", "Orc", "Giant Spider", "Troll", "Dragon"};
     std::string enemy = enemies[temp];
+    
+    if (enemy.compare("Demon")) {
+         std::cout << "You encounter a demon!\n";
+         monster_name = "Demon";
+         monster_health = 200;
+         monster_attack = 15;
+         monster_defense = 5;
+         monster_magic = 10;
+         monster_heal = 1;
+         monster_stealth = 1;
+     } else if (enemy.compare("Orc")) {
+         std::cout << "You encounter an Orc!\n";
+         monster_name = "Orc";
+         monster_health = 50;
+         monster_attack = 5;
+         monster_defense = 2;
+         monster_magic = 2;
+         monster_heal = 1;
+         monster_stealth = 1;
+     } else if (enemy.compare("Giant Spider")) {
+         std::cout << "You encounter a Giant Spider!\n";
+         monster_name = "Giant Spider";
+         monster_health = 100;
+         monster_attack = 10;
+         monster_defense = 5;
+         monster_magic = 1;
+         monster_heal = 1;
+         monster_stealth = 1;
+     } else if (enemy.compare("Troll")) {
+         std::cout << "You encounter a Troll!\n";
+         monster_name = "Troll";
+         monster_health = 20;
+         monster_attack = 3;
+         monster_defense = 3;
+         monster_magic = 1;
+         monster_heal = 1;
+         monster_stealth = 1;
+     } else if (enemy.compare("Dragon")) {
+         std::cout << "You encounter a Dragon!\n";
+         monster_name = "Dragon";
+         monster_health = 250;
+         monster_attack = 20;
+         monster_defense = 7;
+         monster_magic = 5;
+         monster_heal = 1;
+         monster_stealth = 1;
+         Character two("Dragon", 250, 20, 7, 5, 0, 0);
+     } else {
+         std::cout << "Something went wrong..." << std::endl;
+     }
 
-    return enemy;
+    // Establish opponents
+    Character hero(hero_name, hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth);
+    Character monster(monster_name, monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth);
 
- /*   switch(enemy) {
-        case "Demon":
-            std::cout "You encounter a demon!\n";
-            return Character two("Demon", 200, 15, 5, 10, 0, 0);
-            break;
-        case "Orc":
-            std::cout "You encounter an Orc!\n";
-            return Chracter two("Orc", 50, 5, 2, 2, 0, 0);
-            break;
-        case "Giant Spider":
-            std::cout "You encounter a Giant Spider!\n";
-            return Character two("Giant Spider", 100, 10, 5, 0, 0, 0);
-            break;
-        case "Troll":
-            std::cout "You encounter a Troll!\n";
-            return Character two("Troll", 30, 3, 3, 0, 0, 0 );
-            break;
-        case "Dragon":
-            std::cout "You encounter a Dragon!\n";
-            return Character two("Dragon", 250, 20, 7, 5, 0, 0);
-            break;
-        default:
-            std::cout << "Something went wrong..." <<std::endl;
-            RandomEnemy();
-    }*/
+    //Start battle
+    Battle::Initiate(hero, monster);
 }
 
 int main() 
 {
     srand(time(NULL));
-    /*     
-    Character one("Warrior", 100, 100, 50, 25, 15, 20);
-    Character two("Tank", 200, 30, 175, 10, 30,10);
-    
 
-    Battle::Initiate(one, two);
-*/
-   // CharacterSelection();
-    std::string d;
-    d = RandomEnemy();
+    CharacterSelection();
 
-    std::cout << d << std::endl;
-
-   // std::cout << CharacterSelection();
-   // Battle::Initiate(CharacterSelection(), RandomEnemy());
 
     return 0;
 }
-
