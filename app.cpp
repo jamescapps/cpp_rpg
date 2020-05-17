@@ -8,8 +8,8 @@
 
 
 //Current issues
-//  Need to fine tune custom character inputs.
 //  Need to put custom character creation in it's own function.
+//  Refactor custom character checks into a reusable class.
 //  Random vector seems to HEAVILY favor the first monster.
 class Character {
     private: 
@@ -53,6 +53,31 @@ class Character {
             return std::rand() % this -> items;
         }
         // Add more functions here for other actions. 
+        // Want to make a reusable function for checking values on custom input.
+        /*
+        int CustomChecks(attribute) const {
+            //Get and check defense value.
+            while (true) {
+                std::cout << "How many points would you like to give to the " + attribute;
+                std::cin >> attribute;
+
+                //Make sure an integer is input.
+                while(!std::cin) {
+                    std::cout << "Please enter an integer: ";
+                    std::cin.clear();
+                    std::cin.ignore();
+                    std::cin >> attribute;
+                }
+                //Make sure number is within parameters.
+                if (attribute == 0 || attribute > (points_left - 4)) {
+                    std::cout << "Value must be between 1 and " + std::to_string(points_left - 4) << std::endl;
+                    // Repeat process of getting defense points...
+                } else {
+                    points_left = points_left - attribute;
+                    std::cout << "You have " + std::to_string(points_left) + " points left." << std::endl;
+                    break;
+                }
+        }*/
 };
 
 class Weapon {
@@ -220,7 +245,8 @@ Character HeroSelection() {
         case 6:
             //Custom character
             points_left = 50;
-            std::cout << "What is your character's name?: "; 
+            std::cout << "What is your character's name?: ";
+            // May have issue if two names are input. 
             std::cin >> hero_name;
             std::cout <<"You have 50 ability points. Use them wisely...Every category must have at least 1 point...\n";
             usleep(2000000);
@@ -239,8 +265,8 @@ Character HeroSelection() {
                 }
 
                 // Make sure number is within parameters.
-                if (hero_attack > 45 || hero_attack == 0) {
-                    std::cout << "Please enter a value between 1 and 45.." << std::endl;
+                if (hero_attack == 0 || hero_attack > (points_left - 5)) {
+                    std::cout << "Please enter a value between 1 and " + std::to_string(points_left - 5) << std::endl;
                     // Repeat process of getting attack points...
                 } else {
                     points_left = points_left - hero_attack;
@@ -254,7 +280,7 @@ Character HeroSelection() {
                 std::cout << "How many points would you like to give to the defense category?: ";
                 std::cin >> hero_defense;
 
-                //Make sure an integer is intered.
+                //Make sure an integer is input.
                 while(!std::cin) {
                     std::cout << "Please enter an integer: ";
                     std::cin.clear();
@@ -263,8 +289,8 @@ Character HeroSelection() {
                 }
 
                 //Make sure number is within parameters.
-                if (hero_defense == 0 || (hero_defense + points_left) > 46 ) {
-                    std::cout << "Value must be between 1 and 45..." << std::endl;
+                if (hero_defense == 0 || hero_defense > (points_left - 4)) {
+                    std::cout << "Value must be between 1 and " + std::to_string(points_left - 4) << std::endl;
                     // Repeat process of getting defense points...
                 } else {
                     points_left = points_left - hero_defense;
@@ -278,7 +304,7 @@ Character HeroSelection() {
                 std::cout << "How many points would you like to give to the magic category?:  ";
                 std::cin >> hero_magic;
 
-                //Make sure an integer is intered.
+                //Make sure an integer is input.
                 while(!std::cin) {
                     std::cout << "Please enter an integer: ";
                     std::cin.clear();
@@ -287,8 +313,8 @@ Character HeroSelection() {
                 }
 
                 //Make sure number is within parameters.
-                if (hero_magic == 0 || (hero_magic + points_left) > 46) {
-                    std::cout << "Value must be between 1 and 45..." << std::endl;
+                if (hero_magic == 0 || hero_magic > (points_left - 3)) {
+                    std::cout << "Value must be between 1 and " + std::to_string(points_left - 3) << std::endl;
                     // Repeat process of getting magic points...
                 } else {
                     points_left = points_left - hero_magic;
@@ -302,7 +328,7 @@ Character HeroSelection() {
                 std::cout << "How many points would you like to give to the heal category?: ";
                 std::cin >> hero_heal;
 
-                //Make sure an integer is intered.
+                //Make sure an integer is input.
                 while(!std::cin) {
                     std::cout << "Please enter an integer: ";
                     std::cin.clear();
@@ -311,8 +337,8 @@ Character HeroSelection() {
                 }
 
                 //Make sure number is within parameters.
-                if (hero_heal == 0 || (hero_heal + points_left) > 46) {
-                    std::cout << "Value must be between 1 and 45..." << std::endl;
+                if (hero_heal == 0 || hero_heal > (points_left - 2)) {
+                    std::cout << "Value must be between 1 and " + std::to_string(points_left - 2) << std::endl;
                     // Repeat process of getting heal points...
                 } else {
                     points_left = points_left - hero_heal;
@@ -326,7 +352,7 @@ Character HeroSelection() {
                 std::cout << "How many points would you like to give to the stealth category?: ";
                 std::cin >> hero_stealth;
 
-                //Make sure an integer is intered.
+                //Make sure an integer is input.
                 while(!std::cin) {
                     std::cout << "Please enter an integer: ";
                     std::cin.clear();
@@ -335,8 +361,8 @@ Character HeroSelection() {
                 }
 
                 //Make sure number is within parameters.
-                if (hero_stealth == 0 || (hero_stealth + points_left) > 46) {
-                    std::cout << "Value must be between 1 and 45..." << std::endl;
+                if (hero_stealth == 0 || hero_stealth > (points_left - 1)) {
+                    std::cout << "Value must be between 1 and " + std::to_string(points_left - 1) << std::endl;
                     // Repeat process of getting stealth points...
                 } else {
                     points_left = points_left - hero_stealth;
@@ -350,7 +376,7 @@ Character HeroSelection() {
                 std::cout << "How many points would you like to give to the items category?: ";
                 std::cin >> hero_items;
 
-                //Make sure an integer is intered.
+                //Make sure an integer is input.
                 while(!std::cin) {
                     std::cout << "Please enter an integer: ";
                     std::cin.clear();
@@ -359,8 +385,8 @@ Character HeroSelection() {
                 }
                 
                 //Make sure number is within parameters.
-                if (hero_items == 0 || (hero_items + points_left) > 46) {
-                    std::cout << "Value must be between 1 and 45..." << std::endl;
+                if (hero_items == 0 || hero_items > points_left) {
+                    std::cout << "Value must be between 1 and " + std::to_string(points_left) << std::endl;
                     // Repeat process of getting items points...
                 } else {
                     points_left = points_left - hero_items;
@@ -389,11 +415,11 @@ Character EnemySelection() {
     //Get random enemy
     //I don't think the randomizer is working correctly...seems like it's always
     //the demon...
-    std::vector<std::string> enemies = {/*"Demon", */"Orc", "Giant Spider", "Troll", "Dragon"};
+    std::vector<std::string> enemies = {"Demon", "Orc", "Giant Spider", "Troll", "Dragon"};
     std::string enemy = enemies[rand() % enemies.size()];
 
     //Check which enemy and apply attributes.
-    /*if (enemy.compare("Demon")) {
+    if (enemy.compare("Demon")) {
          std::cout << "You encounter a demon!\n";
          monster_name = "Demon";
          monster_health = 200;
@@ -403,7 +429,7 @@ Character EnemySelection() {
          monster_heal = 1;
          monster_stealth = 1;
          monster_items = 1;
-     } else */if (enemy.compare("Orc")) {
+     } else if (enemy.compare("Orc")) {
          std::cout << "You encounter an Orc!\n";
          monster_name = "Orc";
          monster_health = 50;
