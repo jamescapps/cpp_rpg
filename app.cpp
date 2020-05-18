@@ -187,6 +187,7 @@ void CustomChecks(const std::string& name, int& attribute, int& points_left, int
                     }
                    
                     std::cout << std::to_string(position) <<std::endl;
+                    position--;
                     break;
                 }
         }
