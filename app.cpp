@@ -224,7 +224,6 @@ Character HeroSelection() {
         }
         case 6: {
             //Custom character
-            int custom_attack, custom_defense, custom_magic, custom_heal, custom_stealth, custom_items;
             int points_left = 50;
             int position = 5;
 
@@ -235,27 +234,21 @@ Character HeroSelection() {
             std::cout <<"You have 50 ability points. Use them wisely...Every category must have at least 1 point...\n";
             usleep(1000000);
             //Run function to check and aquire input for each category.
-            //Why do points_left and position values flow to next function but I can't put hero_abilities in class declaration?
             CustomChecks("attack", hero_attack, points_left, position);
-            custom_attack = hero_attack;
             CustomChecks("defense", hero_defense, points_left, position);
-            custom_defense = hero_defense;
             CustomChecks("magic", hero_magic, points_left, position);
-            custom_magic = hero_magic;
             CustomChecks("heal", hero_heal, points_left, position);
-            custom_heal = hero_heal;
             CustomChecks("stealth", hero_stealth, points_left, position);
-            custom_stealth = hero_stealth;
             CustomChecks("items", hero_items, points_left, position);
-            custom_items = hero_items;
 
-            Character hero(hero_name, hero_health, custom_attack, custom_defense, custom_magic, custom_heal, custom_stealth, custom_items);
+            Character hero(hero_name, hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth, hero_items);
             return hero;
         }   
         default:
             std::cout << "Please make a valid selection!\n";
             HeroSelection();
     }
+        //Line seems to only be necessary to avoid compiling erro.
         Character hero(hero_name, hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth, hero_items);
         return hero; 
 }
