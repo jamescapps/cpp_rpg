@@ -11,7 +11,6 @@
 
 
 // Current issues
-//      Getting floating point error on custom character creation.
 //      Should probably start seperating into multiple files.
 
 class Character {
@@ -111,7 +110,7 @@ class Battle {
             int char2_items = character2.Items();
                
             //Add more here later...
-            //Should randomize who attacks first and as soon as damage is zero player should
+            //Should randomize who attacks first and as soon as damage is zero player should die.
             //Health and Damage
             int char1_damage = abs(ceil(char2_attack - char1_defense));
             character1.health = character1.health - char1_damage;
@@ -185,8 +184,6 @@ void CustomChecks(const std::string& name, int& attribute, int& points_left, int
                     if (points_left != 0) {
                         std::cout << "You have " + std::to_string(points_left) + " points left." << std::endl;
                     }
-                   
-                    std::cout << std::to_string(position) <<std::endl;
                     position--;
                     break;
                 }
@@ -245,13 +242,13 @@ Character HeroSelection() {
             custom_defense = hero_defense;
             CustomChecks("magic", hero_magic, points_left, position);
             custom_magic = hero_magic;
-            CustomChecks("heal", hero_stealth, points_left, position);
+            CustomChecks("heal", hero_heal, points_left, position);
             custom_heal = hero_heal;
             CustomChecks("stealth", hero_stealth, points_left, position);
             custom_stealth = hero_stealth;
             CustomChecks("items", hero_items, points_left, position);
             custom_items = hero_items;
-  
+
             Character hero(hero_name, hero_health, custom_attack, custom_defense, custom_magic, custom_heal, custom_stealth, custom_items);
             return hero;
         }   
