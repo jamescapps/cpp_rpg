@@ -1,11 +1,13 @@
-#include <vector> 
-#include <ctime> 
-#include <numeric> 
-#include <math.h> 
-#include <cstdio> 
 #include <iostream> 
 #include <unistd.h>
 #include <string>
+#include <vector> 
+#include <numeric> 
+#include <math.h> 
+#include <cstdio>
+#include <stdio.h>
+#include <stdlib.h> 
+#include <time.h>
 
 
 // Current issues
@@ -50,6 +52,10 @@ class Character {
             return std::rand() % this -> heal;
         }
 
+        int Stealth() const {
+            return std::rand() % this -> stealth;
+        }
+
         int Items() const {
             return std::rand() % this -> items;
         }
@@ -75,6 +81,7 @@ class Weapon {
 class Battle {
     public:
         static void Initiate(const Character& character1, const Character& character2) {
+            std::cout << character1.name + " encounters " + character2.name + "!"<< std::endl;
             while (true) {
                 if (Battle::AttackResult(character1, character2).compare("End of battle!") == 0) {
                     std::cout << "End of battle! \n";
@@ -97,11 +104,14 @@ class Battle {
             int char1_heal = character1.Heal();
             int char2_heal = character2.Heal();
 
+            int char1_stealth = character1.Stealth();
+            int char2_stealth = character2.Stealth();
+
             int char1_items = character1.Items();
             int char2_items = character2.Items();
                
             //Add more here later...
-            
+            //Should randomize who attacks first and as soon as damage is zero player should
             //Health and Damage
             int char1_damage = abs(ceil(char2_attack - char1_defense));
             character1.health = character1.health - char1_damage;
@@ -152,7 +162,7 @@ class Battle {
 };
 
 void CustomChecks(const std::string& name, int& attribute, int& points_left, int&position) {
-            //Get and check defense value.
+            //Get and check value.
             while (true) {
                 std::vector<int> v;
                 std::cout << "How many points would you like to give to the " + name + " category?";
@@ -172,8 +182,11 @@ void CustomChecks(const std::string& name, int& attribute, int& points_left, int
                     // Repeat process of getting defense points...
                 } else {
                     points_left = points_left - attribute;
-                    std::cout << "You have " + std::to_string(points_left) + " points left." << std::endl;
-                    position--;
+                    if (points_left != 0) {
+                        std::cout << "You have " + std::to_string(points_left) + " points left." << std::endl;
+                    }
+                   
+                    std::cout << std::to_string(position) <<std::endl;
                     break;
                 }
         }
@@ -192,27 +205,22 @@ Character HeroSelection() {
     //Match selection to category and apply attributes.
     switch(selection) {
         case 1: {
-            std::cout << "You are a warrior!\n";
             Character hero("Warrior", hero_health, 30, 10, 1, 1, 30, 7);
             return hero;
         }
         case 2: {
-            std::cout << "You are a tank!\n";
             Character hero("Tank", hero_health, 10, 30, 1, 1, 1, 7);
             return hero;
         }
         case 3: {
-            std::cout << "You are a wizard!\n";
             Character hero("Wizard", hero_health, 1, 5, 30, 10, 1, 3);
             return hero;
         }
         case 4: {
-            std::cout << "You are a healer!\n";
             Character hero("Healer", hero_health, 1, 1, 5, 30, 4, 9);
             return hero;
         }
         case 5: {
-            std::cout << "You are a thief!\n";
             Character hero("Thief", hero_health, 5, 3, 1, 1, 30, 10);
             return hero;
         }
@@ -227,7 +235,7 @@ Character HeroSelection() {
             std::getline(std::cin,hero_name);
             
             std::cout <<"You have 50 ability points. Use them wisely...Every category must have at least 1 point...\n";
-            usleep(2000000);
+            usleep(1000000);
             //Run function to check and aquire input for each category.
             //Why do points_left and position values flow to next function but I can't put hero_abilities in class declaration?
             CustomChecks("attack", hero_attack, points_left, position);
@@ -258,32 +266,26 @@ Character EnemySelection() {
     //Enemy
     std::string monster_name;
     int monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth, monster_items;
-  
-    //Get random enemy
-    //I don't think the randomizer is working correctly...seems like it's always
-    //the demon...
-    std::vector<std::string> enemies = {"Demon", "Orc", "Giant Spider", "Troll", "Dragon"};
-    std::string enemy = enemies[rand() % enemies.size()];
-
+    //Get a random enemy
+    std::string enemies[5] = {"Demon", "Orc", "Giant Spider", "Troll", "Dragon"};
+    std::string enemy;
+    int rand_index = rand() % 5;
+    enemy = enemies[rand_index];
+          
     //Check which enemy and apply attributes.
-    if (enemy.compare("Demon")) {
-        std::cout << "You encounter a demon!\n";
+    if (enemy == "Demon") {
         Character monster("Demon", 200, 15, 5, 10, 1, 1, 1);
         return monster;
-     } else if (enemy.compare("Orc")) {
-        std::cout << "You encounter an Orc!\n";
+     } else if (enemy == "Orc") {
         Character monster("Orc", 50, 5, 2, 2, 1, 1, 1);
         return monster;
-     } else if (enemy.compare("Giant Spider")) {
-        std::cout << "You encounter a Giant Spider!\n";
+     } else if (enemy == "Giant Spider") {
         Character monster("Giant Spider", 100, 10, 5, 1, 1, 1, 1);
         return monster;
-     } else if (enemy.compare("Troll")) {
-        std::cout << "You encounter a Troll!\n";
+     } else if (enemy == "Troll") {
         Character monster("Troll", 20, 3, 3, 1, 1, 1, 1);
         return monster;
-     } else if (enemy.compare("Dragon")) {
-        std::cout << "You encounter a Dragon!\n";
+     } else if (enemy == "Dragon") {
         Character monster("Dragon", 250, 20, 7, 5, 1, 1, 1);
         return monster;
      } else {
