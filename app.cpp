@@ -88,7 +88,6 @@ class Battle {
                 }
             }
         }
-        
         //Battle logic
         static std::string AttackResult(const Character& character1, const Character& character2) {
             int char1_attack = character1.Attack();
@@ -108,8 +107,9 @@ class Battle {
 
             int char1_items = character1.Items();
             int char2_items = character2.Items();
-               
+
             //Add more here later...
+
             //Should randomize who attacks first and as soon as damage is zero player should die.
             //Health and Damage
             int char1_damage = abs(ceil(char2_attack - char1_defense));
@@ -190,11 +190,34 @@ void CustomChecks(const std::string& name, int& attribute, int& points_left, int
         }
  }
 
+//Variables to be used in character creation.
+std::string char_name;
+int char_health = 100;
+int char_attack, char_defense, char_magic, char_heal, char_stealth, char_items;
+
+Character CustomCharacter() {
+    int points_left = 50;
+    int position = 5;
+
+    std::cout << "What is your character's name?: ";
+    std::cin.ignore();
+    std::getline(std::cin,char_name);
+    
+    std::cout <<"You have 50 ability points. Use them wisely...Every category must have at least 1 point...\n";
+    usleep(1000000);
+    //Run function to check and aquire input for each category.
+    CustomChecks("attack", char_attack, points_left, position);
+    CustomChecks("defense", char_defense, points_left, position);
+    CustomChecks("magic", char_magic, points_left, position);
+    CustomChecks("heal", char_heal, points_left, position);
+    CustomChecks("stealth", char_stealth, points_left, position);
+    CustomChecks("items", char_items, points_left, position);
+
+    Character hero(char_name, char_health, char_attack, char_defense, char_magic, char_heal, char_stealth, char_items);
+    return hero;
+}
+
 Character HeroSelection() {
-    //Hero
-    std::string hero_name;
-    int hero_health = 100;
-    int hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth, hero_items;
     int selection;
 
     std::cout << "What character would you like to be?:\n(1) Warrior\n(2) Tank\n(3) Wizard\n(4) Healer\n(5) Thief\n(6) Custom Character\n";
@@ -203,60 +226,38 @@ Character HeroSelection() {
     //Match selection to category and apply attributes.
     switch(selection) {
         case 1: {
-            Character hero("Warrior", hero_health, 30, 10, 1, 1, 30, 7);
+            Character hero("Warrior", char_health, 30, 10, 1, 1, 30, 7);
             return hero;
         }
         case 2: {
-            Character hero("Tank", hero_health, 10, 30, 1, 1, 1, 7);
+            Character hero("Tank", char_health, 10, 30, 1, 1, 1, 7);
             return hero;
         }
         case 3: {
-            Character hero("Wizard", hero_health, 1, 5, 30, 10, 1, 3);
+            Character hero("Wizard", char_health, 1, 5, 30, 10, 1, 3);
             return hero;
         }
         case 4: {
-            Character hero("Healer", hero_health, 1, 1, 5, 30, 4, 9);
+            Character hero("Healer", char_health, 1, 1, 5, 30, 4, 9);
             return hero;
         }
         case 5: {
-            Character hero("Thief", hero_health, 5, 3, 1, 1, 30, 10);
+            Character hero("Thief", char_health, 5, 3, 1, 1, 30, 10);
             return hero;
         }
         case 6: {
-            //Custom character
-            int points_left = 50;
-            int position = 5;
-
-            std::cout << "What is your character's name?: ";
-            std::cin.ignore();
-            std::getline(std::cin,hero_name);
-            
-            std::cout <<"You have 50 ability points. Use them wisely...Every category must have at least 1 point...\n";
-            usleep(1000000);
-            //Run function to check and aquire input for each category.
-            CustomChecks("attack", hero_attack, points_left, position);
-            CustomChecks("defense", hero_defense, points_left, position);
-            CustomChecks("magic", hero_magic, points_left, position);
-            CustomChecks("heal", hero_heal, points_left, position);
-            CustomChecks("stealth", hero_stealth, points_left, position);
-            CustomChecks("items", hero_items, points_left, position);
-
-            Character hero(hero_name, hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth, hero_items);
-            return hero;
+            return CustomCharacter();
         }   
         default:
             std::cout << "Please make a valid selection!\n";
             HeroSelection();
     }
-        //Line seems to only be necessary to avoid compiling erro.
-        Character hero(hero_name, hero_health, hero_attack, hero_defense, hero_magic, hero_heal, hero_stealth, hero_items);
+        //Line seems to only be necessary to avoid compiling error.
+        Character hero(char_name, char_health, char_attack, char_defense, char_magic, char_heal, char_stealth, char_items);
         return hero; 
 }
 
 Character EnemySelection() {
-    //Enemy
-    std::string monster_name;
-    int monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth, monster_items;
     //Get a random enemy
     std::string enemies[5] = {"Demon", "Orc", "Giant Spider", "Troll", "Dragon"};
     std::string enemy;
@@ -283,7 +284,7 @@ Character EnemySelection() {
          std::cout << "Something went wrong..." << std::endl;
      }
      //Line seems to only be necessary to avoid compiling warning.
-     Character monster(monster_name, monster_health, monster_attack, monster_defense, monster_magic, monster_heal, monster_stealth, monster_items);
+     Character monster(char_name, char_health, char_attack, char_defense, char_magic, char_heal, char_stealth, char_items);
      return monster;
 }
 
