@@ -11,7 +11,7 @@
 
 
 // Current issues
-//      Random vector seems to HEAVILY favor the first monster and only ever seeing "Demon" or "Orc".
+//      Getting floating point error on custom character creation.
 //      Should probably start seperating into multiple files.
 
 class Character {
