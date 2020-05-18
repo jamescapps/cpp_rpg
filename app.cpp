@@ -110,58 +110,80 @@ class Battle {
 
             //Add more here later...
 
+
+            // Attack choices
+            int action;
+            std::cout << "What action will you take?: \n(1) Attack\n(2) Defend\n(3) Use Magic\n(4) Heal\n(5) Steal\n(6) Use Item" << std::endl;
+            std::cin >> action;
+
+            //Hero actions
+            switch(action) {
+                case 1: {
+                    int char2_damage = abs(ceil(char1_attack - char2_defense));
+                    character2.health = character2.health - char2_damage;
+                    std::cout << character1.name + " attacks " + character2.name + " and deals " + std::to_string(char2_damage) + " damage."<< std::endl;
+                    usleep(2000000);
+                    break; 
+                }
+                case 2: {
+                    char1_defense = char1_defense + .5;
+                    std::cout << character1.name + " takes a defensive position." << std::endl;
+                    usleep(2000000);
+                    break;
+                }
+                case 3: {
+                    int char2_damage = abs(ceil(char1_magic - char2_defense));
+                    character2.health = character2.health - char2_damage;
+                    std::cout << character1.name + " casts a spell on " + character2.name + " and deals " + std::to_string(char2_damage) + " damage." << std::endl;
+                    usleep(2000000);
+                    break;
+                }
+                case 4: {
+                    character1.health = character1.health + char1_heal;
+                    std::cout << character1.name + " heals and receives " + std::to_string(char1_heal) + " health." << std::endl;
+                    break;
+                }
+                case 5: {
+                    //Not sure how to handle steal yet.
+                    break;
+                }
+                case 6: {
+                    //Not sure how to handle items yet.
+                    break;
+                }
+                default:
+                    std::cout << "Please make a valid selection." << std::endl;
+
+            }
+
             //Should randomize who attacks first and as soon as damage is zero player should die.
-            //Health and Damage
+            //Monster Attack
             int char1_damage = abs(ceil(char2_attack - char1_defense));
             character1.health = character1.health - char1_damage;
-
-            int char2_damage = abs(ceil(char1_attack - char2_defense));
-            character2.health = character2.health - char2_damage; 
-
-            printf("%s attacks %s and deals %d damage.\n",
-                    character1.name.c_str(),
-                    character2.name.c_str(),
-                    char2_damage); 
+            std::cout << character2.name + " attacks " + character1.name + " and deals " + std::to_string(char1_damage) + " damage." << std::endl;
             usleep(2000000);
-             
-            printf("%s attacks %s and deals %d damage.\n",
-                    character2.name.c_str(),
-                    character1.name.c_str(),
-                    char1_damage);
-            usleep(2000000);
-            
-            //Check for a victor...
-            if (character1.health < 0) {
-                character1.health = 0;
-            }
 
-            if (character2.health < 0) {
-                character2.health = 0;
-            }
- 
+            //Make sure health stops at zero.
+            character1.health = character1.health < 0 ? 0 : character1.health;
+            character2.health = character2.health < 0 ? 0 : character2.health;
+            //Check for a victor.
             if (character1.health == 0) {
-                printf("%s has died!\n%s WINS the battle!\n",
-                        character1.name.c_str(),
-                        character2.name.c_str());
+                std::cout << character1.name + " has died!\n" + character2.name + " WINS the battle!" << std::endl;
                 return "End of battle!";
             } else if (character2.health == 0) {
-                printf("%s has died\n%s WINS the battle!!\n",
-                        character2.name.c_str(),
-                        character1.name.c_str());
+                std::cout << character2.name + " has died.\n" + character1.name + " WINS the battle!" <<std::endl;
                 return "End of battle!";
-            } else { 
-                printf("\t%s health: %d\n\t%s health: %d\n",
-                        character1.name.c_str(),
-                        character1.health,
-                        character2.name.c_str(),
-                        character2.health);
+            } else {
+                std::cout << "\t" + character1.name + " health: " + std::to_string(character1.health) + "\n\t" + character2.name + " health: " + std::to_string(character2.health) <<std::endl;
+                //Reset defense so that extra defense points do not carry over to the next turn.
+                char1_defense = character1.Defense();
             }
             return "End of turn!";
         }
 };
 
 void CustomChecks(const std::string& name, int& attribute, int& points_left, int&position) {
-            //Get and check value.
+            //Get and check value for custom character.
             while (true) {
                 std::vector<int> v;
                 std::cout << "How many points would you like to give to the " + name + " category?";
