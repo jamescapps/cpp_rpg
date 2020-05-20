@@ -50,20 +50,17 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
             int char2_damage = abs(ceil(char1_attack - char2_defense));
             character2.health = character2.health - char2_damage;
             std::cout << character1.name + " attacks " + character2.name + " and deals " + std::to_string(char2_damage) + " damage."<< std::endl;
-            usleep(2000000);
             break; 
         }
         case 2: {
             char1_defense = char1_defense + .5;
             std::cout << character1.name + " takes a defensive position." << std::endl;
-            usleep(2000000);
             break;
         }
         case 3: {
             int char2_damage = abs(ceil(char1_magic - char2_defense));
             character2.health = character2.health - char2_damage;
             std::cout << character1.name + " casts a spell on " + character2.name + " and deals " + std::to_string(char2_damage) + " damage." << std::endl;
-            usleep(2000000);
             break;
         }
         case 4: {
@@ -85,6 +82,7 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
     }
 
     //Should randomize who attacks first and as soon as damage is zero player should die.
+    usleep(2000000);
     //Monster Attack
     int char1_damage = abs(ceil(char2_attack - char1_defense));
     character1.health = character1.health - char1_damage;

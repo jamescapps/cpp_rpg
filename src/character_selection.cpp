@@ -10,7 +10,6 @@
 //Get and check value for custom character.
 void CustomChecks(const std::string& name, int& attribute, int& points_left, int&position) {
             while (true) {
-                std::vector<int> v;
                 std::cout << "How many points would you like to give to the " + name + " category?";
                 std::cin >> attribute;
 
