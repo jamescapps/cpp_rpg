@@ -31,7 +31,6 @@ int main_menu() {
                 std::cout << "Please make a valid selection." << std::endl;
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-              //  main_menu();
         }
     } 
 } 

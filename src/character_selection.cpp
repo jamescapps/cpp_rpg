@@ -42,10 +42,11 @@ Character CustomCharacter() {
     int position = 5;
 
     std::cout << "What is your character's name?: ";
+    std::cin.clear();
     std::cin.ignore();
-    std::getline(std::cin,char_name);
-    
-    std::cout <<"You have 50 ability points. Use them wisely...Every category must have at least 1 point...\n";
+    std::getline(std::cin >> std::ws, char_name);
+
+    std::cout << "You have 50 ability points. Use them wisely...Every category must have at least 1 point...\n";
     usleep(1000000);
     //Run function to check and aquire input for each category.
     CustomChecks("attack", char_attack, points_left, position);
