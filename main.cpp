@@ -12,7 +12,7 @@
 int main_menu() {
     while(true) {
          int selection;
-
+        
         std::cout << " **MAIN MENU**"    << std::endl;
         std::cout << " (1) New Game"     << std::endl;
         std::cout << " (2) Continue"     << std::endl;
@@ -31,6 +31,7 @@ int main_menu() {
                 std::cout << "Please make a valid selection." << std::endl;
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+              //  main_menu();
         }
     } 
 } 

@@ -1,6 +1,7 @@
 #include <iostream> 
 #include <unistd.h>
-#include <math.h> 
+#include <math.h>
+#include <limits> 
 
 #include "../include/character.h"
 #include "../include/battle.h"
@@ -8,10 +9,10 @@
 
 
 void Battle::Initiate(const Character& character1, const Character& character2) {
-    std::cout << "\n\n" + character1.name + " encounters " + character2.name + "!\n"<< std::endl;
+    std::cout << "\n\n" + character1.name + " encounters " + character2.name + "!\n" << std::endl;
     while (true) {
         if (Battle::AttackResult(character1, character2).compare("End of battle!") == 0) {
-            std::cout << "End of battle! \n";
+            std::cout << "End of battle! \n" + character1.name + " now has a record of " + std::to_string(character1.wins) + " - " + std::to_string(character1.losses) << std::endl;
             break;
         }
     }
@@ -39,47 +40,55 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
 
     //Add more here later...
 
+    bool is_selecting = true;
+    while(is_selecting = true) {
     // Attack choices
-    int action;
-    std::cout << "What action will you take?: \n(1) Attack\n(2) Defend\n(3) Use Magic\n(4) Heal\n(5) Steal\n(6) Use Item" << std::endl;
-    std::cin >> action;
+        int action;
+        std::cout << "What action will you take?: \n(1) Attack\n(2) Defend\n(3) Use Magic\n(4) Heal\n(5) Steal\n(6) Use Item" << std::endl;
+        std::cin >> action;
 
-    //Hero actions
-    switch(action) {
-        case 1: {
-            int char2_damage = abs(ceil(char1_attack - char2_defense));
-            character2.health = character2.health - char2_damage;
-            std::cout << character1.name + " attacks " + character2.name + " and deals " + std::to_string(char2_damage) + " damage."<< std::endl;
-            break; 
+    
+        switch(action) {
+            case 1: {
+                int char2_damage = abs(ceil(char1_attack - char2_defense));
+                character2.health = character2.health - char2_damage;
+                std::cout << character1.name + " attacks " + character2.name + " and deals " + std::to_string(char2_damage) + " damage."<< std::endl;
+                break; 
+            }
+            case 2: {
+                char1_defense = char1_defense + .5;
+                std::cout << character1.name + " takes a defensive position." << std::endl;
+                break;
+            }
+            case 3: {
+                int char2_damage = abs(ceil(char1_magic - char2_defense));
+                character2.health = character2.health - char2_damage;
+                std::cout << character1.name + " casts a spell on " + character2.name + " and deals " + std::to_string(char2_damage) + " damage." << std::endl;
+                break;
+            }
+            case 4: {
+                character1.health = character1.health + char1_heal;
+                std::cout << character1.name + " heals and receives " + std::to_string(char1_heal) + " health." << std::endl;
+                break;
+            }
+            case 5: {
+                //Not sure how to handle steal yet.
+                break;
+            }
+            case 6: {
+                //Not sure how to handle items yet.
+                break;
+            }
+            default:
+                std::cout << "Please make a valid selection." << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
         }
-        case 2: {
-            char1_defense = char1_defense + .5;
-            std::cout << character1.name + " takes a defensive position." << std::endl;
-            break;
-        }
-        case 3: {
-            int char2_damage = abs(ceil(char1_magic - char2_defense));
-            character2.health = character2.health - char2_damage;
-            std::cout << character1.name + " casts a spell on " + character2.name + " and deals " + std::to_string(char2_damage) + " damage." << std::endl;
-            break;
-        }
-        case 4: {
-            character1.health = character1.health + char1_heal;
-            std::cout << character1.name + " heals and receives " + std::to_string(char1_heal) + " health." << std::endl;
-            break;
-        }
-        case 5: {
-            //Not sure how to handle steal yet.
-            break;
-        }
-        case 6: {
-            //Not sure how to handle items yet.
-            break;
-        }
-        default:
-            std::cout << "Please make a valid selection." << std::endl;
-
+        is_selecting = false;
+        break;
     }
+    
 
     //Should randomize who attacks first and as soon as damage is zero player should die.
     usleep(2000000);
@@ -87,6 +96,7 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
     int char1_damage = abs(ceil(char2_attack - char1_defense));
     character1.health = character1.health - char1_damage;
     std::cout << character2.name + " attacks " + character1.name + " and deals " + std::to_string(char1_damage) + " damage." << std::endl;
+    is_selecting = true;
     usleep(2000000);
 
     //Check result of attacks.
@@ -95,12 +105,20 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
     character2.health = character2.health < 0 ? 0 : character2.health;
     //Check for a victor.
     if (character1.health == 0) {
-        std::cout << character1.name + " has died!\n" + character2.name + " WINS the battle!" << std::endl;
+        character1.moves++;
+        character2.moves++;
+        character1.losses++;
+        std::cout << character1.name + " has died!\n" + character2.name + " WINS the battle in " + std::to_string(character2.moves) + " moves!"  << std::endl;
         return "End of battle!";
     } else if (character2.health == 0) {
-        std::cout << character2.name + " has died.\n" + character1.name + " WINS the battle!" <<std::endl;
+        character1.moves++;
+        character2.moves++;
+        character1.wins++;
+        std::cout << character2.name + " has died.\n" + character1.name + " WINS the battle in " + std::to_string(character1.moves) + " moves!" <<std::endl;
         return "End of battle!";
     } else {
+        character1.moves++;
+        character2.moves++;
         std::cout << "\t" + character1.name + " health: " + std::to_string(character1.health) + "\n\t" + character2.name + " health: " + std::to_string(character2.health) <<std::endl;
         //Reset defense so that extra defense points do not carry over to the next turn.
         char1_defense = character1.Defense();

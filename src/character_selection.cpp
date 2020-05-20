@@ -1,6 +1,7 @@
 #include <iostream> 
 #include <unistd.h>
 #include <vector> 
+#include <limits>
 
 #include "../include/character_selection.h"
 #include "../include/battle.h"
@@ -59,43 +60,46 @@ Character CustomCharacter() {
 }
 
 Character HeroSelection() {
-    int selection;
+    while (true) {
+        int selection;
 
-    std::cout << "What character would you like to be?:\n(1) Warrior\n(2) Tank\n(3) Wizard\n(4) Healer\n(5) Thief\n(6) Custom Character\n";
-    std::cin >> selection;
+        std::cout << "What character would you like to be?:\n(1) Warrior\n(2) Tank\n(3) Wizard\n(4) Healer\n(5) Thief\n(6) Custom Character\n";
+        std::cin >> selection;
 
-    //Match selection to category and apply attributes.
-    switch(selection) {
-        case 1: {
-            Character hero("Warrior", char_health, 30, 10, 1, 1, 30, 7);
-            return hero;
+        //Match selection to category and apply attributes.
+        switch(selection) {
+            case 1: {
+                Character hero("Warrior", char_health, 30, 10, 1, 1, 30, 7);
+                return hero;
+            }
+            case 2: {
+                Character hero("Tank", char_health, 10, 30, 1, 1, 1, 7);
+                return hero;
+            }
+            case 3: {
+                Character hero("Wizard", char_health, 1, 5, 30, 10, 1, 3);
+                return hero;
+            }
+            case 4: {
+                Character hero("Healer", char_health, 1, 1, 5, 30, 4, 9);
+                return hero;
+            }
+            case 5: {
+                Character hero("Thief", char_health, 5, 3, 1, 1, 30, 10);
+                return hero;
+            }
+            case 6: {
+                return CustomCharacter();
+            }   
+            default:
+                std::cout << "Please make a valid selection!\n";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
         }
-        case 2: {
-            Character hero("Tank", char_health, 10, 30, 1, 1, 1, 7);
-            return hero;
-        }
-        case 3: {
-            Character hero("Wizard", char_health, 1, 5, 30, 10, 1, 3);
-            return hero;
-        }
-        case 4: {
-            Character hero("Healer", char_health, 1, 1, 5, 30, 4, 9);
-            return hero;
-        }
-        case 5: {
-            Character hero("Thief", char_health, 5, 3, 1, 1, 30, 10);
-            return hero;
-        }
-        case 6: {
-            return CustomCharacter();
-        }   
-        default:
-            std::cout << "Please make a valid selection!\n";
-            HeroSelection();
+        //is this correct?
+       break;     
     }
-        //Line seems to only be necessary to avoid compiling error.
-        Character hero(char_name, char_health, char_attack, char_defense, char_magic, char_heal, char_stealth, char_items);
-        return hero; 
 }
 
 Character EnemySelection() {
