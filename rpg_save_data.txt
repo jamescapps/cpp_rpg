@@ -1,0 +1,10 @@
+
+Name: Warrior
+	Level: 0
+	Health: 51
+	Attack: 30
+	Defense: 10
+	Magic: 1
+	Heal: 1
+	Stealth: 30
+	Items: 7
