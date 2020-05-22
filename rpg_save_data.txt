@@ -1,10 +1,13 @@
 
-Name: Warrior
+Name: Wizard
 	Level: 0
-	Health: 51
-	Attack: 30
-	Defense: 10
-	Magic: 1
-	Heal: 1
-	Stealth: 30
-	Items: 7
+	Wins: 1
+	Losses: 0
+	Health: 85
+	Attack: 1
+	Defense: 5
+	Magic: 30
+	Heal: 10
+	Stealth: 1
+	Items: 3
+	Exp: 0

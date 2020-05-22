@@ -5,9 +5,12 @@
 
 //Character will have 50 available points, every category must have at
 //least 1 point.
-Character::Character(std::string name, int health,  int attack, int defense, 
-                int magic, int heal, int stealth, int items) {
+Character::Character(std::string name, int level, int wins, int losses, int health,  int attack, int defense, 
+                int magic, int heal, int stealth, int items, int exp) {
     this -> name = name;
+    this -> level = level;
+    this -> wins = wins;
+    this -> losses = losses;
     this -> health = health;
     this -> attack = attack;
     this -> defense = defense;
@@ -15,6 +18,7 @@ Character::Character(std::string name, int health,  int attack, int defense,
     this -> heal = heal;
     this -> stealth = stealth;
     this -> items = items;
+    this -> exp = exp;
 }
 
 int Character::Attack() const {

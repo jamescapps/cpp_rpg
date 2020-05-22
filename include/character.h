@@ -10,10 +10,11 @@ class Character {
         mutable int wins = 0;
         mutable int losses = 0;
         mutable int moves = 0;
+        mutable int exp = 0;
         mutable int attack, defense, magic, heal, stealth, items;
 
-        Character(std::string name, int health,  int attack, int defense, 
-                        int magic, int heal, int stealth, int items); 
+        Character(std::string name, int level, int wins, int losses, int health,  int attack, int defense, 
+                        int magic, int heal, int stealth, int items, int exp); 
 
         int Attack() const;
         int Defense() const;
