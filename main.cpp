@@ -2,6 +2,7 @@
 #include <string>
 #include <limits>
 #include <fstream>
+#include <sstream>
 
 #include "./include/character.h"
 #include "./include/battle.h"
@@ -11,25 +12,32 @@
 
 void continue_game() {
     while (true) {
-        std::ifstream save_file;
-        save_file.open("rpg_save_data.txt");
+       // std::ifstream save_file;
+       // save_file.open("rpg_save_data.txt");
 
-        std::string output;
-        std::string desired_character;
+        std::ifstream save_file("rpg_save_data.txt");
+        std::string output, desired_character, output_name;
+        int saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_stealth, saved_items;
+
 
         std::cout << "What is the name of the character you wish to continue your adventure with?: ";
         std::cin.clear();
         std::cin.ignore();
         std::getline(std::cin >> std::ws, desired_character);
         
+        /*while (save_file >> output.rdbuf()) {
+            std::string save_char;
+            save_char = output.str();
+            std::cout << save_char.substr(6, save_char.length() - 1);
+            
+
+        }*/        
         while (getline(save_file, output)) {
             //Will have to adapt this to only output the designated character and not all characters.
-             std::cout << output << std::endl;
             if (output.find("Name: ") != std::string::npos) {
-                std::string output_name;
                 output_name = output.substr(6, (output.length() - 1));
                 if (desired_character == output_name) {
-                    std::cout << "Welcome back " + desired_character + "! Your journey continues..." << std::endl;
+                    std::cout << "Welcome back " + output_name + "! Your journey continues..." << std::endl;
                     continue;
                     //Load the saved data for the character.
                     //Battle::Initiate(SavedCharacter(desired_character), EnemySelection()); 
@@ -45,63 +53,71 @@ void continue_game() {
 
             if (output.find("Health: ") != std::string::npos) {
                 std::string output_health;
-                int saved_health;
-                
+                std::cout << output << std::endl;
                 output_health = output.substr(9, (output.length() - 1));
                 saved_health = std::stoi(output_health);
             }
 
             if (output.find("Attack: ") != std::string::npos) {
                 std::string output_attack;
-                int saved_attack;
-
+                std::cout << output << std::endl;
                 output_attack = output.substr(9, (output.length() - 1));
                 saved_attack = std::stoi(output_attack);
             }
 
             if (output.find("Defense: ") != std::string::npos) {
                 std::string output_defense;
-                int saved_defense;
-
+                std::cout << output << std::endl;
                 output_defense = output.substr(10, (output.length() - 1));
                 saved_defense = std::stoi(output_defense);
             }
 
             if (output.find("Magic: ") != std::string::npos) {
                 std::string output_magic;
-                int saved_magic;
-
+                std::cout << output << std::endl;
                 output_magic = output.substr(8, (output.length() - 1));
                 saved_magic = std::stoi(output_magic);
             }
 
             if (output.find("Heal: ") != std::string::npos) {
                 std::string output_heal;
-                int saved_heal;
-
+                std::cout << output << std::endl;
                 output_heal = output.substr(7, (output.length() - 1));
                 saved_heal = std::stoi(output_heal);
             }
 
             if (output.find("Stealth: ") != std::string::npos) {
                 std::string output_stealth;
-                int saved_stealth;
-
+                std::cout << output << std::endl;
                 output_stealth = output.substr(10, (output.length() - 1));
                 saved_stealth = std::stoi(output_stealth);
             }
 
             if (output.find("Items: ") != std::string::npos) {
                 std::string output_items;
-                int saved_items;
-
+                std::cout << output << std::endl;
                 output_items = output.substr(8, (output.length() - 1));
                 saved_items = std::stoi(output_items);
             }
-
-            Battle::Initiate(SavedCharacter(desired_character, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_stealth, saved_items), EnemySelection()); 
         }
         save_file.close();
+
+        char response;
+        std::cout << "Are you ready to continue?: (y) (n)" << std::endl;
+        std::cin >> response;
+
+        
+
+        if (std::tolower(response) == 121) {
+            Battle::Initiate(SavedCharacter(output_name, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_stealth, saved_items), EnemySelection()); 
+        } else if (std::tolower(response) == 110) {
+            std::cout << "Well what are you waiting for?";
+        } else {
+            std::cout << std::tolower(response);
+        }
+
+
+        
     }
     
 }
