@@ -8,6 +8,14 @@
 #include "../include/weapon.h"
 
 
+//Continue with a saved character.
+Character SavedCharacter(const std::string& saved_name, int& saved_health, int& saved_attack, int& saved_defense, int& saved_magic, int& saved_heal, int& saved_stealth, int& saved_items) {
+    std::cout << saved_name << std::endl;
+    //will have to adapt level
+    Character hero(saved_name, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_stealth, saved_items);
+    return hero;
+}
+
 //Get and check value for custom character.
 void CustomChecks(const std::string& name, int& attribute, int& points_left, int&position) {
             while (true) {

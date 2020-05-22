@@ -11,6 +11,7 @@ static std::string char_name;
 static int char_health = 100;
 static int char_attack, char_defense, char_magic, char_heal, char_stealth, char_items;
 
+Character SavedCharacter();
 Character CustomCharacter();
 Character HeroSelection();
 Character EnemySelection();
