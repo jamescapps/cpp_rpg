@@ -125,7 +125,6 @@ void continue_game() {
 
         save_file.close();
 
-    
         char response;
         std::cout << "Are you ready to continue?: (y) (n)" << std::endl;
         std::cin >> response;
