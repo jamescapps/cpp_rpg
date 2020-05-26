@@ -21,6 +21,8 @@ Character::Character(std::string name, int level, int wins, int losses, int heal
     this -> exp = exp;
 }
 
+
+//Need to adjust these to be more accurate and consistent.
 int Character::Attack() const {
     return std::rand() % this -> attack;
 }

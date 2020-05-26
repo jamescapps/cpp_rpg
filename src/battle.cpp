@@ -5,38 +5,22 @@
 #include <fstream> 
 
 #include "../include/character.h"
+#include "../include/character_selection.h"
 #include "../include/battle.h"
 #include "../include/weapon.h"
+#include "../include/upgrade.h"
+#include "../include/save.h"
 
 
 void Battle::Initiate(const Character& character1, const Character& character2) {
     std::cout << "\n\n" + character1.name + " encounters " + character2.name + "!\n" << std::endl;
     while (true) {
-        if (Battle::AttackResult(character1, character2).compare("End of battle!") == 0) {
+        if (Battle::AttackResult(character1, character2).compare("\nEnd of battle!") == 0) {
             std::cout << "End of battle! \n" + character1.name + " now has a record of " + std::to_string(character1.wins) + " - " + std::to_string(character1.losses) << std::endl;
-            
-            //Save Character data.
-            //Need to adjust to overwrite current data and not adda new one each time.
-            std::ofstream save_file;
-            save_file.open("save_data/" + character1.name + ".txt", std::ios_base::app);
 
-            save_file << "\nName: "      << character1.name    << std::endl;
-            save_file << "\tLevel: "     << character1.level   << std::endl;
-            save_file << "\tWins: "      << character1.wins    << std::endl;
-            save_file << "\tLosses: "    << character1.losses  << std::endl;
-            save_file << "\tHealth: "    << character1.health  << std::endl;
-            save_file << "\tAttack: "    << character1.attack  << std::endl;
-            save_file << "\tDefense: "   << character1.defense << std::endl;
-            save_file << "\tMagic: "     << character1.magic   << std::endl;
-            save_file << "\tHeal: "      << character1.heal    << std::endl;
-            save_file << "\tStealth: "   << character1.stealth << std::endl;
-            save_file << "\tItems: "     << character1.items   << std::endl;
-            save_file << "\tExp: "       << character1.exp     << std::endl;
-
-            save_file.close();
-
-            std::cout << "Your progress has been saved!" << std::endl;
-
+            //See if character is eligible for upgrades and save data.
+            check_for_upgrade(character1);
+            save(character1);
             break;
         }
     }
@@ -133,13 +117,14 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
         character2.moves++;
         character1.losses++;
         std::cout << character1.name + " has died!\n" + character2.name + " WINS the battle in " + std::to_string(character2.moves) + " moves!"  << std::endl;
-        return "End of battle!";
+        return "\nEnd of battle!";
     } else if (character2.health == 0) {
         character1.moves++;
         character2.moves++;
         character1.wins++;
-        std::cout << character2.name + " has died.\n" + character1.name + " WINS the battle in " + std::to_string(character1.moves) + " moves!" <<std::endl;
-        return "End of battle!";
+        character1.exp += character2.exp;
+        std::cout << character2.name + " has died.\n\n" + character1.name + " WINS the battle in " + std::to_string(character1.moves) + " moves!" <<std::endl;
+        return "\nEnd of battle!";
     } else {
         character1.moves++;
         character2.moves++;

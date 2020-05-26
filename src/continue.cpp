@@ -12,7 +12,6 @@
 void continue_game() {
     while (true) {
         std::string output, desired_character, output_name;
-
         int saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_stealth, saved_items, saved_exp;
         
         std::cout << "What is the name of the character you wish to continue your adventure with?: ";

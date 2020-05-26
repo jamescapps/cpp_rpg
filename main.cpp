@@ -31,7 +31,6 @@ int main()
                 Battle::Initiate(HeroSelection(), EnemySelection()); 
                 break; 
             case 2: {
-                //Run function to continue game
                 continue_game();
                 break;
             }

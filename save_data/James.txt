@@ -1,13 +1,13 @@
 
 Name: James
-	Level: 0
-	Wins: 1
+	Level: 1
+	Wins: 4
 	Losses: 0
-	Health: 99
-	Attack: 28
+	Health: 963
+	Attack: 37
 	Defense: 5
 	Magic: 1
-	Heal: 14
+	Heal: 20
 	Stealth: 1
 	Items: 1
-	Exp: 0
+	Exp: 185

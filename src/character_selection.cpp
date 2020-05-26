@@ -111,19 +111,19 @@ Character EnemySelection() {
           
     //Check which enemy and apply attributes.
     if (enemy == "Demon") {
-        Character monster("Demon", char_level, char_wins, char_losses, 200, 15, 5, 10, 1, 1, 1, char_exp);
+        Character monster("Demon", char_level, char_wins, char_losses, 200, 15, 5, 10, 1, 1, 1, 100);
         return monster;
      } else if (enemy == "Orc") {
-        Character monster("Orc", char_level, char_wins, char_losses, 50, 5, 2, 2, 1, 1, 1, char_exp);
+        Character monster("Orc", char_level, char_wins, char_losses, 50, 5, 2, 2, 1, 1, 1, 30);
         return monster;
      } else if (enemy == "Giant Spider") {
-        Character monster("Giant Spider", char_level, char_wins, char_losses, 100, 10, 5, 1, 1, 1, 1, char_exp);
+        Character monster("Giant Spider", char_level, char_wins, char_losses, 100, 10, 5, 1, 1, 1, 1, 50);
         return monster;
      } else if (enemy == "Troll") {
-        Character monster("Troll", char_level, char_wins, char_losses, 35, 3, 3, 1, 1, 1, 1, char_exp);
+        Character monster("Troll", char_level, char_wins, char_losses, 35, 3, 3, 1, 1, 1, 1, 10);
         return monster;
      } else if (enemy == "Dragon") {
-        Character monster("Dragon", char_level, char_wins, char_losses, 250, 20, 7, 5, 1, 1, 1, char_exp);
+        Character monster("Dragon", char_level, char_wins, char_losses, 250, 20, 7, 5, 1, 1, 1, 120);
         return monster;
      } else {
          std::cout << "Something went wrong..." << std::endl;

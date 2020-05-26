@@ -1,0 +1,13 @@
+
+Name: Wizard
+	Level: 0
+	Wins: 1
+	Losses: 0
+	Health: 85
+	Attack: 1
+	Defense: 5
+	Magic: 30
+	Heal: 10
+	Stealth: 1
+	Items: 3
+	Exp: 50
