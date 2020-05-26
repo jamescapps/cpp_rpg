@@ -1,5 +1,5 @@
-rpg: main.o battle.o character_selection.o character.o weapon.o
-	g++ main.o battle.o character_selection.o character.o weapon.o -o rpg
+rpg: main.o battle.o character_selection.o character.o weapon.o continue.o
+	g++ main.o battle.o character_selection.o character.o weapon.o continue.o -o rpg
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -15,6 +15,9 @@ character.o: ./src/character.cpp
 
 weapon.o: ./src/weapon.cpp
 	g++ -c ./src/weapon.cpp
+
+continue.o: ./src/continue.cpp
+	g++ -c ./src/continue.cpp
 
 clean:
 	rm *.o rpg

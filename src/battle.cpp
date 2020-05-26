@@ -18,7 +18,7 @@ void Battle::Initiate(const Character& character1, const Character& character2) 
             //Save Character data.
             //Need to adjust to overwrite current data and not adda new one each time.
             std::ofstream save_file;
-            save_file.open("rpg_save_data.txt", std::ios_base::app);
+            save_file.open("save_data/" + character1.name + ".txt", std::ios_base::app);
 
             save_file << "\nName: "      << character1.name    << std::endl;
             save_file << "\tLevel: "     << character1.level   << std::endl;
