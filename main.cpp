@@ -12,7 +12,6 @@
 #include "./include/adventure.h"
 
 
-
 void AdventureMenu() {
     bool in_menu = true;
     while(in_menu = true) {
