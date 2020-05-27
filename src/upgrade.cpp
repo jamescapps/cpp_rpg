@@ -24,11 +24,9 @@ void upgrade(const std::string& name, int& attribute, int& points_left) {
                     std::cin.ignore();
                     std::cin >> points;
                 }
-
                 //Make sure number is within parameters.
                 if (points > points_left) {
                     std::cout << "Value must be between 0 and " + std::to_string(points_left) << std::endl;
-                    // Repeat process of getting defense points...
                 } else {
                     points_left = points_left - points;
                     attribute += points;
@@ -43,11 +41,31 @@ void upgrade(const std::string& name, int& attribute, int& points_left) {
 void check_for_upgrade(const Character& character1) {
     int upgrade_points;
     //Level 1
-    if (character1.exp > 150) {
-        character1.level = 1;
+    if (character1.level == 0 && character1.exp > 150) {
+        character1.level++;
         upgrade_points = 5;
         std::cout << "Congratulations you have achieved level 1!\nYou have 5 points to upgrade attributes with!\nDo you wish to use them now?: (y) (n)" << std::endl;
     }
+    //Level 2
+    if (character1.level == 1 && character1.exp > 350) {
+        character1.level++;
+        upgrade_points = 7;
+        std::cout << "Congratulations you have achieved level 1!\nYou have 7 points to upgrade attributes with!\nDo you wish to use them now?: (y) (n)" << std::endl;
+    }
+    //Level 3
+    if (character1.level == 2 && character1.exp > 600) {
+        character1.level++;
+        upgrade_points = 10;
+        std::cout << "Congratulations you have achieved level 1!\nYou have 3 points to upgrade attributes with!\nDo you wish to use them now?: (y) (n)" << std::endl;
+    }
+    //Level 4
+    if (character1.level == 3 && character1.exp > 950) {
+        character1.level++;
+        upgrade_points = 12;
+        std::cout << "Congratulations you have achieved level 4!\nYou have 7 points to upgrade attributes with!\nDo you wish to use them now?: (y) (n)" << std::endl;
+    }
+
+    //Can add more levels later or find a reusable way to do it so you can level infinitely.
 
     while (true) {
         char upgrade_response;

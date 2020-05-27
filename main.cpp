@@ -11,9 +11,6 @@
 #include "./include/continue.h"
 
 
-//Current issues
-//  Continue character not resetting after incorrect input.
-
 int main() 
 {
     srand(time(NULL));
