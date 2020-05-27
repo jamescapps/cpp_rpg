@@ -2,6 +2,6 @@
 #define CONTINUE_H
 
 
-void continue_game();
+Character ContinueGame();
 
 #endif

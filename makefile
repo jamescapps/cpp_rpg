@@ -1,5 +1,5 @@
-rpg: main.o battle.o character_selection.o character.o weapon.o continue.o upgrade.o save.o
-	g++ main.o battle.o character_selection.o character.o weapon.o continue.o upgrade.o save.o -o rpg
+rpg: main.o battle.o character_selection.o character.o weapon.o continue.o upgrade.o save.o adventure.o
+	g++ main.o battle.o character_selection.o character.o weapon.o continue.o upgrade.o save.o adventure.o -o rpg
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -24,6 +24,9 @@ upgrade.o: ./src/upgrade.cpp
 
 save.o: ./src/save.cpp
 	g++ -c ./src/save.cpp
+
+adventure.o: ./src/adventure.cpp
+	g++ -c ./src/adventure.cpp
 
 clean:
 	rm *.o rpg

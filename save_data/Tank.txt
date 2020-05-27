@@ -1,0 +1,13 @@
+
+Name: Tank
+	Level: 0
+	Wins: 1
+	Losses: 0
+	Health: 12
+	Attack: 10
+	Defense: 30
+	Magic: 1
+	Heal: 1
+	Stealth: 1
+	Items: 7
+	Exp: 30

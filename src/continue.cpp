@@ -9,7 +9,7 @@
 #include "../include/continue.h"
 
 
-void continue_game() {
+Character ContinueGame() {
     while (true) {
         std::string output, desired_character, output_name;
         int saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_stealth, saved_items, saved_exp;
@@ -127,7 +127,7 @@ void continue_game() {
 
         if (std::tolower(response) == 121) {
             Character SavedCharacter(output_name, saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_stealth, saved_items, saved_exp);
-            Battle::Initiate(SavedCharacter, EnemySelection()); 
+            return SavedCharacter;
             break;
         } else if (std::tolower(response) == 110) {
             std::cout << "Well what are you waiting for?" <<std::endl;
