@@ -40,9 +40,6 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
     int char1_heal = character1.Heal();
     int char2_heal = character2.Heal();
 
-    int char1_stealth = character1.Stealth();
-    int char2_stealth = character2.Stealth();
-
     int char1_items = character1.Items();
     int char2_items = character2.Items();
 

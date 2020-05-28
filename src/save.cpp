@@ -22,7 +22,6 @@ void save(const Character& character1) {
     save_file << "\tDefense: "   << character1.defense << std::endl;
     save_file << "\tMagic: "     << character1.magic   << std::endl;
     save_file << "\tHeal: "      << character1.heal    << std::endl;
-    save_file << "\tStealth: "   << character1.stealth << std::endl;
     save_file << "\tItems: "     << character1.items   << std::endl;
     save_file << "\tExp: "       << character1.exp     << std::endl;
 

@@ -14,13 +14,12 @@ class Character {
         mutable int attack, defense, magic, heal, stealth, items;
 
         Character(std::string name, int level, int wins, int losses, int health,  int attack, int defense, 
-                        int magic, int heal, int stealth, int items, int exp); 
+                        int magic, int heal, int items, int exp); 
 
         int Attack() const;
         int Defense() const;
         int Magic() const;
         int Heal() const;
-        int Stealth() const;
         int Items() const;
         // Add more functions here for other actions. 
 };

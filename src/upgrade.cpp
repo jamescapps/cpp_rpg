@@ -70,8 +70,7 @@ void check_for_upgrade(const Character& character1) {
             upgrade("attack", character1.attack, upgrade_points);
             upgrade("defense", character1.defense, upgrade_points);
             upgrade("magic", character1.magic, upgrade_points);
-            upgrade("heal", character1.heal, upgrade_points);
-            upgrade("stealth", character1.stealth, upgrade_points);
+            upgrade("heal", character1.heal, upgrade_points);;
             upgrade("items", character1.items, upgrade_points);
             break;
 

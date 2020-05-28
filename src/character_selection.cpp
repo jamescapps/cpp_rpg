@@ -53,10 +53,9 @@ Character CustomCharacter() {
     CustomChecks("defense", char_defense, points_left, position);
     CustomChecks("magic", char_magic, points_left, position);
     CustomChecks("heal", char_heal, points_left, position);
-    CustomChecks("stealth", char_stealth, points_left, position);
     CustomChecks("items", char_items, points_left, position);
 
-    Character hero(char_name, char_level, char_wins, char_losses, char_health, char_attack, char_defense, char_magic, char_heal, char_stealth, char_items, char_exp);
+    Character hero(char_name, char_level, char_wins, char_losses, char_health, char_attack, char_defense, char_magic, char_heal, char_items, char_exp);
     return hero;
 }
 
@@ -64,32 +63,28 @@ Character HeroSelection() {
     while (true) {
         int selection;
 
-        std::cout << "What character would you like to be?:\n(1) Warrior\n(2) Tank\n(3) Wizard\n(4) Healer\n(5) Thief\n(6) Custom Character\n";
+        std::cout << "What character would you like to be?:\n(1) Warrior\n(2) Tank\n(3) Wizard\n(4) Healer\n(5) Custom Character\n";
         std::cin >> selection;
 
         //Match selection to category and apply attributes.
         switch(selection) {
             case 1: {
-                Character hero("Warrior", char_level, char_wins, char_losses, char_health, 30, 10, 1, 1, 30, 7, char_exp);
+                Character hero("Warrior", char_level, char_wins, char_losses, char_health, 30, 10, 1, 1, 8, char_exp);
                 return hero;
             }
             case 2: {
-                Character hero("Tank", char_level, char_wins, char_losses, char_health, 10, 30, 1, 1, 1, 7, char_exp);
+                Character hero("Tank", char_level, char_wins, char_losses, char_health, 10, 30, 1, 1, 8, char_exp);
                 return hero;
             }
             case 3: {
-                Character hero("Wizard", char_level, char_wins, char_losses, char_health, 1, 5, 30, 10, 1, 3, char_exp);
+                Character hero("Wizard", char_level, char_wins, char_losses, char_health, 1, 5, 30, 10, 4, char_exp);
                 return hero;
             }
             case 4: {
-                Character hero("Healer", char_level, char_wins, char_losses, char_health, 1, 1, 5, 30, 4, 9, char_exp);
+                Character hero("Healer", char_level, char_wins, char_losses, char_health, 1, 1, 5, 30, 13, char_exp);
                 return hero;
             }
             case 5: {
-                Character hero("Thief", char_level, char_wins, char_losses, char_health, 5, 3, 1, 1, 30, 10, char_exp);
-                return hero;
-            }
-            case 6: {
                 return CustomCharacter();
             }   
             default:
@@ -111,24 +106,24 @@ Character EnemySelection() {
           
     //Check which enemy and apply attributes.
     if (enemy == "Demon") {
-        Character monster("Demon", char_level, char_wins, char_losses, 200, 15, 5, 10, 1, 1, 1, 100);
+        Character monster("Demon", char_level, char_wins, char_losses, 200, 15, 5, 10, 1, 1, 100);
         return monster;
      } else if (enemy == "Orc") {
-        Character monster("Orc", char_level, char_wins, char_losses, 50, 5, 2, 2, 1, 1, 1, 30);
+        Character monster("Orc", char_level, char_wins, char_losses, 50, 5, 2, 2, 1, 1, 30);
         return monster;
      } else if (enemy == "Giant Spider") {
-        Character monster("Giant Spider", char_level, char_wins, char_losses, 100, 10, 5, 1, 1, 1, 1, 50);
+        Character monster("Giant Spider", char_level, char_wins, char_losses, 100, 10, 5, 1, 1, 1, 50);
         return monster;
      } else if (enemy == "Troll") {
-        Character monster("Troll", char_level, char_wins, char_losses, 35, 3, 3, 1, 1, 1, 1, 10);
+        Character monster("Troll", char_level, char_wins, char_losses, 35, 3, 3, 1, 1, 1, 10);
         return monster;
      } else if (enemy == "Dragon") {
-        Character monster("Dragon", char_level, char_wins, char_losses, 250, 20, 7, 5, 1, 1, 1, 120);
+        Character monster("Dragon", char_level, char_wins, char_losses, 250, 20, 7, 5, 1, 1, 120);
         return monster;
      } else {
          std::cout << "Something went wrong..." << std::endl;
      }
      //Line seems to only be necessary to avoid compiling warning.
-     Character monster(char_name, char_level, char_wins, char_losses, char_health, char_attack, char_defense, char_magic, char_heal, char_stealth, char_items, char_exp);
+     Character monster(char_name, char_level, char_wins, char_losses, char_health, char_attack, char_defense, char_magic, char_heal, char_items, char_exp);
      return monster;
 }

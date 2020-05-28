@@ -12,7 +12,7 @@
 Character ContinueGame() {
     while (true) {
         std::string output, desired_character, output_name;
-        int saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_stealth, saved_items, saved_exp;
+        int saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_items, saved_exp;
         
         std::cout << "What is the name of the character you wish to continue your adventure with?: ";
         std::getline(std::cin >> std::ws, desired_character);
@@ -97,13 +97,6 @@ Character ContinueGame() {
                 saved_heal = std::stoi(output_heal);
             }
 
-            if (output.find("Stealth: ") != std::string::npos) {
-                std::string output_stealth;
-                std::cout << output << std::endl;
-                output_stealth = output.substr(10, (output.length() - 1));
-                saved_stealth = std::stoi(output_stealth);
-            }
-
             if (output.find("Items: ") != std::string::npos) {
                 std::string output_items;
                 std::cout << output << std::endl;
@@ -126,7 +119,7 @@ Character ContinueGame() {
         std::cin >> response;
 
         if (std::tolower(response) == 121) {
-            Character SavedCharacter(output_name, saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_stealth, saved_items, saved_exp);
+            Character SavedCharacter(output_name, saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_items, saved_exp);
             return SavedCharacter;
             break;
         } else if (std::tolower(response) == 110) {
