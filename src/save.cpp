@@ -26,9 +26,7 @@ void save(const Character& character1) {
     save_file << "\tItems: "     << character1.items     << std::endl;
     save_file << "\tExp: "       << character1.exp       << std::endl;
 
-    //character1.inventory.push_back("test");
-    //character1.inventory.push_back("test2");
-    //Saves inventory vector
+    //Save inventory vector
     save_file << "\tInventory: "; 
     std::ostream_iterator<std::string> output_iterator(save_file, ", ");
     std::copy(character1.inventory.begin(), character1.inventory.end(), output_iterator);

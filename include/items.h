@@ -11,9 +11,8 @@ class Item {
 
     Item(std::string type, int effectiveness);
 };
-/*
-Item Potion("Potion", 10);
-Item HiPotion("Hi-Potion", 15);
-Item MegaPotion("Mega-Potion", 25);*/
+
+Item RandomItem();
+
 
 #endif

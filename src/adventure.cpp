@@ -48,12 +48,10 @@ void AdventureGame(const Character& character1) {
                                 std::cin >> item_choice;
 
                                 if (std::tolower(item_choice) == 'y') {
-                                    std::cout << "You look at the item." << std::endl;
-                                    //Random function to give a dropped item.
-                                    Item Potion("Potion", 10);
-                                    character1.inventory.push_back(Potion.type);
-                                    character1.inventory.push_back(std::to_string(Potion.effectiveness));
-
+                                    //Get randomly dropped item and save it to inventory.
+                                    Item Dropped_Item = RandomItem();
+                                    std::cout << "You find a " + Dropped_Item.type + "!" << std::endl;
+                                    character1.inventory.push_back(Dropped_Item.type);
                                     save(character1);
                                     //Continue on with game.
                                 } else if (std::tolower(item_choice) == 'n') {

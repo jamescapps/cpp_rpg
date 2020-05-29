@@ -112,7 +112,14 @@ Character ContinueGame() {
                 saved_exp = std::stoi(output_exp);
             }
 
-            //Need to add inventory
+            if (output.find("Inventory") != std::string::npos) {
+                //Need to make a cleaner inventory output. Categorize with numbers.
+                std::vector<std::string> output_inv;
+                std::cout << output << std::endl;
+                //Will most likely have to do some conversion for the vector.
+                //output_inv = output;
+                //saved_inventory = output_inv;   
+            }
         }
 
         save_file.close();
