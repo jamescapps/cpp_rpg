@@ -1,6 +1,8 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include <vector>
+
 
 class Character {
     public:
@@ -12,9 +14,10 @@ class Character {
         mutable int moves = 0;
         mutable int exp = 0;
         mutable int attack, defense, magic, heal, stealth, items;
+        mutable std::vector<std::string> inventory = {};
 
         Character(std::string name, int level, int wins, int losses, int health,  int attack, int defense, 
-                        int magic, int heal, int items, int exp); 
+                        int magic, int heal, int items, int exp, std::vector<std::string> inventory); 
 
         int Attack() const;
         int Defense() const;

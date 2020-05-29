@@ -6,7 +6,7 @@
 //Character will have 50 available points, every category must have at
 //least 1 point.
 Character::Character(std::string name, int level, int wins, int losses, int health,  int attack, int defense, 
-                int magic, int heal, int items, int exp) {
+                int magic, int heal, int items, int exp, std::vector<std::string> inventory) {
     this -> name = name;
     this -> level = level;
     this -> wins = wins;
@@ -18,6 +18,7 @@ Character::Character(std::string name, int level, int wins, int losses, int heal
     this -> heal = heal;
     this -> items = items;
     this -> exp = exp;
+    this -> inventory = inventory;
 }
 
 

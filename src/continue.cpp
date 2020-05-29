@@ -13,6 +13,7 @@ Character ContinueGame() {
     while (true) {
         std::string output, desired_character, output_name;
         int saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_items, saved_exp;
+        std::vector<std::string> saved_inventory;
         
         std::cout << "What is the name of the character you wish to continue your adventure with?: ";
         std::getline(std::cin >> std::ws, desired_character);
@@ -110,6 +111,8 @@ Character ContinueGame() {
                 output_exp = output.substr(6, (output.length() - 1));
                 saved_exp = std::stoi(output_exp);
             }
+
+            //Need to add inventory
         }
 
         save_file.close();
@@ -119,7 +122,7 @@ Character ContinueGame() {
         std::cin >> response;
 
         if (std::tolower(response) == 121) {
-            Character SavedCharacter(output_name, saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_items, saved_exp);
+            Character SavedCharacter(output_name, saved_level, saved_wins, saved_losses, saved_health, saved_attack, saved_defense, saved_magic, saved_heal, saved_items, saved_exp, saved_inventory);
             return SavedCharacter;
             break;
         } else if (std::tolower(response) == 110) {

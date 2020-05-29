@@ -10,6 +10,8 @@
 #include "../include/battle.h"
 #include "../include/continue.h"
 #include "../include/adventure.h"
+#include "../include/items.h"
+#include "../include/save.h"
 
 
 void AdventureGame(const Character& character1) {
@@ -48,6 +50,11 @@ void AdventureGame(const Character& character1) {
                                 if (std::tolower(item_choice) == 'y') {
                                     std::cout << "You look at the item." << std::endl;
                                     //Random function to give a dropped item.
+                                    Item Potion("Potion", 10);
+                                    character1.inventory.push_back(Potion.type);
+                                    character1.inventory.push_back(std::to_string(Potion.effectiveness));
+
+                                    save(character1);
                                     //Continue on with game.
                                 } else if (std::tolower(item_choice) == 'n') {
                                     std::cout << "You go about your way." << std::endl;

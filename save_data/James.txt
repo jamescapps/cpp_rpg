@@ -8,6 +8,6 @@ Name: James
 	Defense: 6
 	Magic: 1
 	Heal: 31
-	Stealth: 1
 	Items: 1
 	Exp: 1061
+	Inventory:{}
