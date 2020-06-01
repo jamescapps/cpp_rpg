@@ -39,7 +39,6 @@ void AdventureGame(const Character& character1) {
                             std::cout << "You choose to fight!" << std::endl;
                             Battle::Initiate(character1, EnemySelection());
 
-                            //Will need to seperate random item into it's own function because it will be used after every battle.
                             while(true) {
                                 char item_choice;
                                 std::cout << "\n\nThe enemy has dropped an item. Would you like to see what it is? (y) (n)" << std::endl;
@@ -49,9 +48,9 @@ void AdventureGame(const Character& character1) {
 
                                 if (std::tolower(item_choice) == 'y') {
                                     //Get randomly dropped item and save it to inventory.
-                                    Item Dropped_Item = RandomItem();
-                                    std::cout << "You find a " + Dropped_Item.type + "!" << std::endl;
-                                    character1.inventory.push_back(Dropped_Item.type);
+                                    RandomItem();
+                                    std::cout << "You find a " + RandomItem().type + "!" << std::endl;
+                                    character1.inventory.push_back(RandomItem().type);
                                     save(character1);
                                     //Continue on with game.
                                 } else if (std::tolower(item_choice) == 'n') {
@@ -78,6 +77,12 @@ void AdventureGame(const Character& character1) {
             case 2:
                 std::cout << "You have chosen to look around." << std::endl;
                 //Find an item if you look around.
+                //Get randomly dropped item and save it to inventory.
+                RandomItem();
+                std::cout << "You find a " + RandomItem().type + "!" << std::endl;
+                character1.inventory.push_back(RandomItem().type);
+                save(character1);
+                
                 break;
             case 3:
                 std::cout << "You have chosen to run away." << std::endl;

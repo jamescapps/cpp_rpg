@@ -52,7 +52,6 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
         std::cout << "What action will you take?: \n(1) Attack\n(2) Defend\n(3) Use Magic\n(4) Heal\n(5) Steal\n(6) Use Item" << std::endl;
         std::cin >> action;
 
-    
         switch(action) {
             case 1: {
                 int char2_damage = abs(ceil(char1_attack - char2_defense));
