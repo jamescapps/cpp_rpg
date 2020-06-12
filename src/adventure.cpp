@@ -56,6 +56,7 @@ void AdventureGame(const Character& character1) {
                                 } else if (std::tolower(item_choice) == 'n') {
                                     std::cout << "You go about your way." << std::endl;
                                     //Continue on with game.
+                                    //Adventure page 2
                                 } else {
                                     std::cout << "Please make a valid choice." << std::endl;
                                     std::cin.clear();
@@ -66,7 +67,14 @@ void AdventureGame(const Character& character1) {
                            break;
                         case 2:
                             std::cout << "You choose to run!\n" << std::endl;
-                            //Have a random function that will randomly choose if running away is successful.
+                            //Random chance to see if running away is successful.
+                            if (rand() % 2 == 0) {
+                                std::cout << "Running away was successful!" << std::endl;
+                                //continue to adventure page 2
+                            } else {
+                                std::cout << "The Monster chases after you! You must fight!" << std::endl;
+                                Battle::Initiate(character1, EnemySelection());
+                            }
                             break;
                         default:
                             std::cout << "Please make a valid choice." << std::endl;
