@@ -17,10 +17,10 @@ void AdventureMenu() {
     while(in_menu = true) {
         int selection;
         
-        std::cout << "  **Adventure** "      << std::endl;
+        std::cout << "  **Adventure** "   << std::endl;
         std::cout << " (1) New Game"      << std::endl;
         std::cout << " (2) Continue"      << std::endl;
-        std::cout << " (3) Main Menu "      << std::endl; 
+        std::cout << " (3) Main Menu "    << std::endl; 
         std::cin >> selection;
 
         switch(selection) {
@@ -51,7 +51,7 @@ void BattleMenu() {
         std::cout << "  **Battle** "      << std::endl;
         std::cout << " (1) New Game"      << std::endl;
         std::cout << " (2) Continue"      << std::endl;
-        std::cout << " (3) Main Menu "      << std::endl; 
+        std::cout << " (3) Main Menu "    << std::endl; 
         std::cin >> selection;
 
         switch(selection) {

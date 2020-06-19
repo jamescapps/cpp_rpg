@@ -13,14 +13,13 @@
 #include "../include/items.h"
 #include "../include/save.h"
 
-
-void AdventureGame(const Character& character1) {
-    std::cout << "Welcome " + character1.name + "! Your adventure awaits..." << std::endl;
-     usleep(2000000);
-    
+//Reusable function for adventure scenarios.
+//Eventually could create random scenarios.
+//Probably should make Template a Class.
+void Template(const Character& character1, std::string description_1, std::string pre_battle) {
      while (true) {
         int choice;
-        std::cout << "You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away" << std::endl;
+        std::cout << description_1 << std::endl;
         std::cin >> choice;
 
         switch(choice) {
@@ -28,7 +27,7 @@ void AdventureGame(const Character& character1) {
                 std::cout << "You have chosen to go inside." << std::endl;
 
                 while (true) {
-                    std::cout << "You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away" << std::endl;
+                    std::cout << pre_battle << std::endl;
 
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -101,4 +100,11 @@ void AdventureGame(const Character& character1) {
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
      }
+
+}
+void AdventureGame(const Character& character1) {
+    std::cout << "Welcome " + character1.name + "! Your adventure awaits..." << std::endl;
+     usleep(2000000);
+    
+    Template(character1, "You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away", "You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away");
 }
