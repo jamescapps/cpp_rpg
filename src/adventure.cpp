@@ -13,98 +13,25 @@
 #include "../include/items.h"
 #include "../include/save.h"
 
+#include "../include/scenario.h"
+
 //Reusable function for adventure scenarios.
 //Eventually could create random scenarios.
 //Probably should make Template a Class.
-void Template(const Character& character1, std::string description_1, std::string pre_battle) {
-     while (true) {
-        int choice;
-        std::cout << description_1 << std::endl;
-        std::cin >> choice;
 
-        switch(choice) {
-            case 1:
-                std::cout << "You have chosen to go inside." << std::endl;
-
-                while (true) {
-                    std::cout << pre_battle << std::endl;
-
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cin >> choice;
-
-                    switch(choice) {
-                        case 1:
-                            std::cout << "You choose to fight!" << std::endl;
-                            Battle::Initiate(character1, EnemySelection());
-
-                            while(true) {
-                                char item_choice;
-                                std::cout << "\n\nThe enemy has dropped an item. Would you like to see what it is? (y) (n)" << std::endl;
-                                std::cin.clear();
-                                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                std::cin >> item_choice;
-
-                                if (std::tolower(item_choice) == 'y') {
-                                    //Get randomly dropped item and save it to inventory.
-                                    RandomItem();
-                                    std::cout << "You find a " + RandomItem().type + "!" << std::endl;
-                                    character1.inventory.push_back(RandomItem().type);
-                                    save(character1);
-                                    //Continue on with game.
-                                } else if (std::tolower(item_choice) == 'n') {
-                                    std::cout << "You go about your way." << std::endl;
-                                    //Continue on with game.
-                                    //Adventure page 2
-                                } else {
-                                    std::cout << "Please make a valid choice." << std::endl;
-                                    std::cin.clear();
-                                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-                                }
-                            }
-                            
-                           break;
-                        case 2:
-                            std::cout << "You choose to run!\n" << std::endl;
-                            //Random chance to see if running away is successful.
-                            if (rand() % 2 == 0) {
-                                std::cout << "Running away was successful!" << std::endl;
-                                //continue to adventure page 2
-                            } else {
-                                std::cout << "The Monster chases after you! You must fight!" << std::endl;
-                                Battle::Initiate(character1, EnemySelection());
-                            }
-                            break;
-                        default:
-                            std::cout << "Please make a valid choice." << std::endl;
-                            std::cin.clear();
-                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-                    }
-                }
-            case 2:
-                std::cout << "You have chosen to look around." << std::endl;
-                //Find an item if you look around.
-                //Get randomly dropped item and save it to inventory.
-                RandomItem();
-                std::cout << "You find a " + RandomItem().type + "!" << std::endl;
-                character1.inventory.push_back(RandomItem().type);
-                save(character1);
-                
-                break;
-            case 3:
-                std::cout << "You have chosen to run away." << std::endl;
-                break;
-            default:
-                std::cout << "Please make a valid choice." << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-     }
-
-}
 void AdventureGame(const Character& character1) {
     std::cout << "Welcome " + character1.name + "! Your adventure awaits..." << std::endl;
      usleep(2000000);
     
-    Template(character1, "You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away", "You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away");
+    std::string thisisatest = "You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away";
+    std::string test2 = "You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away";
+    std::string test3 = "You choose to go inside.";
+    std::string test4 = "You choose to look around.";
+    std::string test5 = "You choose to run away";
+    std::string test6 = "You choose to fight!";
+    std::string test7 = "You choose to run away";
+    std::string test8 = "You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away";
+
+    Scenario challenge_1(thisisatest, test2, test3, test4, test5, test6, test7, test8);
+  
 }
