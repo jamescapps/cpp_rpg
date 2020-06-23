@@ -15,21 +15,17 @@
 #include "../include/scenario.h"
 
 
-Scenario::Scenario(const std::string& description, 
-                   const std::string& choice_1, 
-                   const std::string& choice_2, 
-                   const std::string& choice_3, 
-                   const std::string& choice_4, 
-                   const std::string& choice_5,
-                   const std::string& choice_6) {
+Scenario::Scenario(std::string description, std::string choice_1, std::string choice_2, 
+                   std::string choice_3, std::string pre_battle, std::string choice_4, 
+                   std::string choice_5) {
 
                        this -> description = description;
                        this -> choice_1 = choice_1;
                        this -> choice_2 = choice_2;
                        this -> choice_3 = choice_3;
+                       this -> pre_battle = pre_battle;
                        this -> choice_4 = choice_4;
                        this -> choice_5 = choice_5;
-                       this -> choice_5 = choice_6;
                    }
 /*
 void Scenario::Challenge(const Character& character1, const Scenario& scenario1) {

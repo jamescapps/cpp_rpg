@@ -19,20 +19,14 @@ class Scenario {
         mutable std::string description;
         mutable std::string choice_1;
         mutable std::string choice_2;
-        mutable std::string pre_battle;
         mutable std::string choice_3;
+        mutable std::string pre_battle;
         mutable std::string choice_4;
         mutable std::string choice_5;
-        mutable std::string choice_6;
 
-        Scenario(const std::string& description, 
-                 const std::string& choice_1, 
-                 const std::string& choice_2, 
-                 const std::string& choice_3, 
-                 const std::string& choice_4, 
-                 const std::string& choice_5, 
-                 const std::string& choice_6
-                 );
+        Scenario(std::string description, std::string choice_1, std::string choice_2, 
+                 std::string choice_3, std::string pre_battle,  std::string choice_4, 
+                 std::string choice_5);
 
         //void Challenge(const Character& character1, const Scenario& scenario1);
 };
