@@ -15,14 +15,15 @@
 
 #include "../include/scenario.h"
 
-
+//Need resuable functions for run away and item drop.
 void Template(const Character& character1, const Scenario& Challenge_1) {
      while (true) {
         int choice;
         std::cout << Challenge_1.description << std::endl;
         std::cin >> choice;
 
-        switch(choice) {
+        while (true) {
+           switch(choice) {
             case 1:
                 std::cout << Challenge_1.choice_1 << std::endl;
 
@@ -83,32 +84,46 @@ void Template(const Character& character1, const Scenario& Challenge_1) {
                 }
             case 2:
                 std::cout << Challenge_1.choice_2<< std::endl;
-                //Find an item if you look around.
-                //Get randomly dropped item and save it to inventory.
-                RandomItem();
-                std::cout << "You find a " + RandomItem().type + "!" << std::endl;
-                character1.inventory.push_back(RandomItem().type);
-                save(character1);
-                
-                break;
+                //Get randomly dropped item and save it to inventory then move to next scenario,
+                //or move to pre-battle - based on coin flip.
+                if (rand() % 2 == 0) {
+                    RandomItem();
+                    std::cout << "You find a " + RandomItem().type + "!" << std::endl;
+                    character1.inventory.push_back(RandomItem().type);
+                    save(character1);
+                    //Move to next scenario.
+                } else {
+                    //Move to pre-battle without receiving item.
+                    //Needs to move to case 1.
+                    choice = 1;
+                    break;
+                }
             case 3:
                 std::cout << Challenge_1.choice_3 << std::endl;
-                break;
+                if (rand() % 2 == 0) {
+                    std::cout << "Running away was successful!" << std::endl;
+                    //continue to adventure page 2
+                } else {
+                    std::cout << "The Monster chases after you! You must fight!" << std::endl;
+                    Battle::Initiate(character1, EnemySelection());
+                }
             default:
                 std::cout << "Please make a valid choice." << std::endl;
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          } 
         }
      }
-
 }
 
 //Eventually could create random scenarios.
+//Could structure it so that choices are always the same, but could pull descriptions from an array of strings randomly.
 
 void AdventureGame(const Character& character1) {
     std::cout << "Welcome " + character1.name + "! Your adventure awaits..." << std::endl;
      usleep(2000000);
     
+    // Test scenario one
     std::string description = "You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away";
     std::string choice_1 = "You choose to go inside.";
     std::string choice_2 = "You choose to look around.";
@@ -116,9 +131,30 @@ void AdventureGame(const Character& character1) {
     std::string pre_battle = "You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away";
     std::string choice_4 = "You choose to fight!";
     std::string choice_5 = "You choose to run away";
-    
+
+    // Test scenario two
+    std::string descritipn_2 = "A monster approaches you and asks you for a favor. What would you like to do?\n(1) Hear him out\n(2) Tell him to stop where he is\n(3)Run away";
+    std::string choice_2_1 = "You choose to hear him out.";
+    std::string choice_2_2 = "You chose to tell him to stop where he is.";
+   // std::string pre_battle = 
+
     Scenario Challenge_1(description, choice_1, choice_2, choice_3, pre_battle, choice_4, choice_5);
 
     Template(character1, Challenge_1);
 }
 
+
+
+/*
+    Initial point of contact
+        -Option 1
+            -Pre battle description
+                -Battle
+        -Option 2
+            -Random chance to determine if you move to pre battle description or you receive an item and move to next scenario
+        -Run away
+
+
+
+
+*/

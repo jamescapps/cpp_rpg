@@ -12,7 +12,6 @@
         Pre battle choice.
         Description of the battle.
         Choice to fight or run away.
-        Choice to pick up the randomly dropped item.
 */
 class Scenario {
     public:
