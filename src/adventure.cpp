@@ -12,23 +12,22 @@
 #include "../include/adventure.h"
 #include "../include/items.h"
 #include "../include/save.h"
-
 #include "../include/scenario.h"
 
-//Need resuable functions for run away and item drop.
-void Template(const Character& character1, const Scenario& Challenge_1) {
+
+void Template(const Character& character1, const Scenario& Challenge) {
      while (true) {
         int choice;
-        std::cout << Challenge_1.description << std::endl;
+        std::cout << Challenge.description << std::endl;
         std::cin >> choice;
 
         while (true) {
            switch(choice) {
             case 1:
-                std::cout << Challenge_1.choice_1 << std::endl;
+                std::cout << Challenge.choice_1 << std::endl;
 
                 while (true) {
-                    std::cout << Challenge_1.pre_battle << std::endl;
+                    std::cout << Challenge.pre_battle << std::endl;
 
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -36,7 +35,7 @@ void Template(const Character& character1, const Scenario& Challenge_1) {
 
                     switch(choice) {
                         case 1:
-                            std::cout << Challenge_1.choice_4 << std::endl;
+                            std::cout << Challenge.choice_4 << std::endl;
                             Battle::Initiate(character1, EnemySelection());
 
                             while(true) {
@@ -63,10 +62,9 @@ void Template(const Character& character1, const Scenario& Challenge_1) {
                                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
                                 }
                             }
-                            
                            break;
                         case 2:
-                            std::cout << Challenge_1.choice_5 << std::endl;
+                            std::cout << Challenge.choice_5 << std::endl;
                             //Random chance to see if running away is successful.
                             if (rand() % 2 == 0) {
                                 std::cout << "Running away was successful!" << std::endl;
@@ -83,7 +81,7 @@ void Template(const Character& character1, const Scenario& Challenge_1) {
                     }
                 }
             case 2:
-                std::cout << Challenge_1.choice_2<< std::endl;
+                std::cout << Challenge.choice_2<< std::endl;
                 //Get randomly dropped item and save it to inventory then move to next scenario,
                 //or move to pre-battle - based on coin flip.
                 if (rand() % 2 == 0) {
@@ -92,14 +90,23 @@ void Template(const Character& character1, const Scenario& Challenge_1) {
                     character1.inventory.push_back(RandomItem().type);
                     save(character1);
                     //Move to next scenario.
+                    // Test scenario two
+                    std::string choice_3 = "You choose to run away";
+                    std::string choice_4 = "You choose to fight!";
+                    std::string choice_5 = "You choose to run away";
+                    std::string description_2 = "A monster approaches you and asks you for a favor. What would you like to do?\n(1) Hear him out\n(2) Tell him to stop where he is\n(3)Run away";
+                    std::string choice_2_1 = "You choose to hear him out.";
+                    std::string choice_2_2 = "You chose to tell him to stop where he is.";
+                    std::string pre_battle_2 =  "He decides you look delicious.\nWhat will you do?\n(1) Fight\n(2)Run away";
+                    Scenario Challenge_2(description_2, choice_2_1, choice_2_2, choice_3, pre_battle_2, choice_4, choice_5);
+                    Template(character1, Challenge_2);
                 } else {
                     //Move to pre-battle without receiving item.
-                    //Needs to move to case 1.
                     choice = 1;
                     break;
                 }
             case 3:
-                std::cout << Challenge_1.choice_3 << std::endl;
+                std::cout << Challenge.choice_3 << std::endl;
                 if (rand() % 2 == 0) {
                     std::cout << "Running away was successful!" << std::endl;
                     //continue to adventure page 2
@@ -132,13 +139,10 @@ void AdventureGame(const Character& character1) {
     std::string choice_4 = "You choose to fight!";
     std::string choice_5 = "You choose to run away";
 
-    // Test scenario two
-    std::string descritipn_2 = "A monster approaches you and asks you for a favor. What would you like to do?\n(1) Hear him out\n(2) Tell him to stop where he is\n(3)Run away";
-    std::string choice_2_1 = "You choose to hear him out.";
-    std::string choice_2_2 = "You chose to tell him to stop where he is.";
-   // std::string pre_battle = 
+    
 
     Scenario Challenge_1(description, choice_1, choice_2, choice_3, pre_battle, choice_4, choice_5);
+    
 
     Template(character1, Challenge_1);
 }

@@ -10,4 +10,4 @@ Name: James
 	Heal: 31
 	Items: 1
 	Exp: 1411
-	Inventory: Mega-Potion, 
+	Inventory: Hi-Potion, 
