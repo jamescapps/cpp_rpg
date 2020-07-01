@@ -15,25 +15,28 @@
 #include "../include/scenario.h"
 
 
-
 //Next step is to pull random strings from an array and insert them as challenge1 and challenge 2 values
-// Test scenario one
-std::string description = "You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away";
-std::string choice_1 = "You choose to go inside.";
-std::string choice_2 = "You choose to look around.";
-std::string choice_3 = "You choose to run away";
-std::string pre_battle = "You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away";
+std::vector<std::string> descriptions = {"You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away", 
+                                         "A monster approaches you and asks you for a favor. What would you like to do?\n(1) Hear him out\n(2) Tell him to stop where he is\n(3)Run away"
+                                         };
+
+
+std::vector<std::string> pre_battles = {"You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away", 
+                                        "He decides you look delicious.\nWhat will you do?\n(1) Fight\n(2)Run away"
+                                        };
+
+//Randomize description, then use same index to get relevant pre_battle.
+int rand_desc = std::rand() % descriptions.size();
+
+// Standard Choices
+std::string choice_1 = "You choose 1";
+std::string choice_2 = "You choose 2";
+std::string choice_3 = "You choose 3";
 std::string choice_4 = "You choose to fight!";
 std::string choice_5 = "You choose to run away";
 
-// Test scenario two
-std::string description_2 = "A monster approaches you and asks you for a favor. What would you like to do?\n(1) Hear him out\n(2) Tell him to stop where he is\n(3)Run away";
-std::string choice_2_1 = "You choose to hear him out.";
-std::string choice_2_2 = "You chose to tell him to stop where he is.";
-std::string pre_battle_2 =  "He decides you look delicious.\nWhat will you do?\n(1) Fight\n(2)Run away";
-
-Scenario Challenge_1(description, choice_1, choice_2, choice_3, pre_battle, choice_4, choice_5);
-Scenario Challenge_2(description_2, choice_2_1, choice_2_2, choice_3, pre_battle_2, choice_4, choice_5);
+Scenario Challenge_1(descriptions[rand_desc], choice_1, choice_2, choice_3, pre_battles[rand_desc], choice_4, choice_5);
+Scenario Challenge_2(descriptions[rand_desc], choice_1, choice_2, choice_3, pre_battles[rand_desc], choice_4, choice_5);
 
 
 void Template(const Character& character1, const Scenario& Challenge) {

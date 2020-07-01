@@ -1,13 +1,13 @@
 
 Name: James
 	Level: 4
-	Wins: 15
+	Wins: 17
 	Losses: 0
-	Health: 675
+	Health: 533
 	Attack: 49
 	Defense: 6
 	Magic: 1
 	Heal: 31
 	Items: 1
-	Exp: 1531
-	Inventory: Potion, Mega-Potion, 
+	Exp: 1661
+	Inventory: Hi-Potion, Hi-Potion, 
