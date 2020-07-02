@@ -17,12 +17,18 @@
 
 //Next step is to pull random strings from an array and insert them as challenge1 and challenge 2 values
 std::vector<std::string> descriptions = {"You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away", 
-                                         "A monster approaches you and asks you for a favor. What would you like to do?\n(1) Hear him out\n(2) Tell him to stop where he is\n(3)Run away"
+                                         "A monster approaches you and asks you for a favor. What would you like to do?\n(1) Hear him out\n(2) Tell him to stop where he is\n(3)Run away",
+                                         "You see a monster heading towards an innocent looking person. What would you like to do?\n(1)Investigate\n(2)Wait\n(3) Run away",
+                                         "A monster calls you a name. What would you like too do?\n(1)Insult\n(2)Let it go\n(3)Run away",
+                                         "You come to a clearing in the woods. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away"
                                          };
 
 
 std::vector<std::string> pre_battles = {"You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away", 
-                                        "He decides you look delicious.\nWhat will you do?\n(1) Fight\n(2)Run away"
+                                        "He decides you look delicious.\nWhat will you do?\n(1) Fight\n(2)Run away",
+                                        "The monster spots you!\nWhat will you do?\n(1) Fight\n(2)Run away",
+                                        "The monster heads towards you!\nWhat will you do?\n(1) Fight\n(2)Run away",
+                                        "You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away", 
                                         };
 
 //Randomize description, then use same index to get relevant pre_battle.
