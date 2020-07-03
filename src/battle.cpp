@@ -49,7 +49,7 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
     while(is_selecting = true) {
     // Attack choices
         int action;
-        std::cout << "What action will you take?: \n(1) Attack\n(2) Defend\n(3) Use Magic\n(4) Heal\n(5) Steal\n(6) Use Item" << std::endl;
+        std::cout << "What action will you take?: \n(1) Attack\n(2) Defend\n(3) Use Magic\n(4) Heal\n(5) Use Item" << std::endl;
         std::cin >> action;
 
         switch(action) {
@@ -76,10 +76,6 @@ std::string Battle::AttackResult(const Character& character1, const Character& c
                 break;
             }
             case 5: {
-                //Not sure how to handle steal yet.
-                break;
-            }
-            case 6: {
                 //Not sure how to handle items yet.
                 break;
             }
