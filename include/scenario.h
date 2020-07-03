@@ -30,4 +30,6 @@ class Scenario {
         //void Challenge(const Character& character1, const Scenario& scenario1);
 };
 
+Scenario RandomScenario();
+
 #endif 

@@ -27,89 +27,42 @@ Scenario::Scenario(std::string description, std::string choice_1, std::string ch
                        this -> choice_4 = choice_4;
                        this -> choice_5 = choice_5;
                    }
+
+
 /*
-void Scenario::Challenge(const Character& character1, const Scenario& scenario1) {
-     while (true) {
-        int choice;
-        std::cout << scenario1.description << std::endl;
-        std::cin >> choice;
+    This section has a group of random initial descriptions for the an adventure scenario, followed by a corresponding pre battle
+    description, after standard yes/no questions. Those values are found randomly when the template for the adventure is inacted.
+    Thus allowing the user to play through never ending adventure scenarios.
+*/
 
-        switch(choice) {
-            case 1:
-                std::cout << scenario1.choice_1 << std::endl;
+Scenario RandomScenario() {
+    std::vector<std::string> descriptions = {"You come to the entrance to a cave. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away", 
+                                            "A monster approaches you and asks you for a favor. What would you like to do?\n(1) Hear him out\n(2) Tell him to stop where he is\n(3) Run away",
+                                            "You see a monster heading towards an innocent looking person. What would you like to do?\n(1) Investigate\n(2) Wait\n(3) Run away",
+                                            "A monster calls you a name. What would you like too do?\n(1) Insult\n(2) Let it go\n(3) Run away",
+                                            "You come to a clearing in the woods. What would you like to do?\n(1) Go inside\n(2) Look around\n(3) Run away",
+                                            "Something smells strange. What would you like to do?\n(1) Follow your nose\n(2) Look around\n(3) Run away", 
+                                            };
 
-                while (true) {
-                    std::cout << scenario1.choice_6 << std::endl;
 
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cin >> choice;
+    std::vector<std::string> pre_battles = {"You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away", 
+                                            "He decides you look delicious.\nWhat will you do?\n(1) Fight\n(2)Run away",
+                                            "The monster spots you!\nWhat will you do?\n(1) Fight\n(2)Run away",
+                                            "The monster heads towards you!\nWhat will you do?\n(1) Fight\n(2)Run away",
+                                            "You are only a few feet in when a monster comes out of nowhere.\nWhat will you do?\n(1) Fight\n(2)Run away",
+                                            "You discover a monster!\nWhat will you do?\n(1) Fight\n(2)Run away" 
+                                            };
 
-                    switch(choice) {
-                        case 1:
-                            std::cout << scenario1.choice_4 << std::endl;
-                            Battle::Initiate(character1, EnemySelection());
+    //Randomize description, then use same index to get relevant pre_battle.
+    int rand_desc = std::rand() % descriptions.size();
 
-                            while(true) {
-                                char item_choice;
-                                std::cout << "\n\nThe enemy has dropped an item. Would you like to see what it is? (y) (n)" << std::endl;
-                                std::cin.clear();
-                                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                std::cin >> item_choice;
+    // Standard Choices
+    std::string choice_1 = "You choose 1";
+    std::string choice_2 = "You choose 2";
+    std::string choice_3 = "You choose 3";
+    std::string choice_4 = "You choose to fight!";
+    std::string choice_5 = "You choose to run away";
 
-                                if (std::tolower(item_choice) == 'y') {
-                                    //Get randomly dropped item and save it to inventory.
-                                    RandomItem();
-                                    std::cout << "You find a " + RandomItem().type + "!" << std::endl;
-                                    character1.inventory.push_back(RandomItem().type);
-                                    save(character1);
-                                    //Continue on with game.
-                                } else if (std::tolower(item_choice) == 'n') {
-                                    std::cout << "You go about your way." << std::endl;
-                                    //Continue on with game.
-                                    //Adventure page 2
-                                } else {
-                                    std::cout << "Please make a valid choice." << std::endl;
-                                    std::cin.clear();
-                                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-                                }
-                            }
-                            
-                           break;
-                        case 2:
-                            std::cout << scenario1.choice_5 << std::endl;
-                            //Random chance to see if running away is successful.
-                            if (rand() % 2 == 0) {
-                                std::cout << "Running away was successful!" << std::endl;
-                                //continue to adventure page 2
-                            } else {
-                                std::cout << "The Monster chases after you! You must fight!" << std::endl;
-                                Battle::Initiate(character1, EnemySelection());
-                            }
-                            break;
-                        default:
-                            std::cout << "Please make a valid choice." << std::endl;
-                            std::cin.clear();
-                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-                    }
-                }
-            case 2:
-                std::cout << scenario1.choice_2 << std::endl;
-                //Find an item if you look around.
-                //Get randomly dropped item and save it to inventory.
-                RandomItem();
-                std::cout << "You find a " + RandomItem().type + "!" << std::endl;
-                character1.inventory.push_back(RandomItem().type);
-                save(character1);
-                
-                break;
-            case 3:
-                std::cout << scenario1.choice_3 << std::endl;
-                break;
-            default:
-                std::cout << "Please make a valid choice." << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-     }
-}*/
+    Scenario Challenge(descriptions[rand_desc], choice_1, choice_2, choice_3, pre_battles[rand_desc], choice_4, choice_5);
+    return Challenge;
+}
